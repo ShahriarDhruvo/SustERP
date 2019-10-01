@@ -1,0 +1,25 @@
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-image: url("/Img/HomePage_background.svg"), url("/Img/green-banner.svg");
+    background-repeat: repeat-x, no-repeat;
+    background-size: 30%, 25%;
+    background-position-x: 0, 50%;
+    background-position-y: 70%, 5%;
+}
+
+h1 {
+    text-align: center;
+    color: dodgerblue;
+    padding-top: 4%;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+    background-color: lightgrey;
+    width: 600px;
+    margin: 10% 0px 0px 33%;
+    border: 10px double dodgerblue;
+    box-shadow: 0px 0px 100px lightgrey;
+    padding: 10px;
+}
