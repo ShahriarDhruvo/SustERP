@@ -50,7 +50,8 @@ img.avatar {
     padding: 16px;
 }
 
-span.psw {
+.extra-content a {
     float: right;
-    /* padding-top: 10px; */
+    text-decoration: none;
+    color: #339eff;
 }

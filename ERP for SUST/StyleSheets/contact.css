@@ -1,0 +1,47 @@
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-image: url("/Img/Designs/green-banner.svg"), url("/Img/Designs/footer-illustration.png");
+    background-repeat: no-repeat, repeat-x;
+    background-size: 25%, 50%;
+    background-position-x: 50%;
+    background-position-y: 5%, 98%;
+}
+
+h1 {
+    padding-top: 4%;
+    text-align: center;
+    color: #044d92;
+}
+
+.person {
+    text-align: center;
+    color: #044d92;
+}
+
+.img {
+    border-radius: 50%;
+}
+
+.farhad {
+    float: right;
+    padding: 10%;
+    padding-right: 20%;
+}
+
+.dhruvo {
+    float: left;
+    padding: 10%;
+    padding-left: 20%;
+}
+
+.socialMedia-logo {
+    padding: 5px;
+}
+
+.Copyright {
+    position: fixed;     
+    text-align: center;  
+    color: white;  
+    bottom: 100px; 
+    width: 100%
+}
