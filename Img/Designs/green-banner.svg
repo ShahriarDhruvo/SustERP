@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1146px" height="267px" viewBox="0 0 1146 267" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>4D99E7DF-22B6-420A-8CBA-E6720086A15A</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="23 47 1121 47 1121 218 23 266"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LZ-Why-Us-Page" transform="translate(-147.000000, -2206.000000)">
+            <g id="Group-4" transform="translate(146.000000, 2129.000000)">
+                <g id="Green-Banner-Desktop" transform="translate(1.000000, 77.000000)">
+                    <path d="M1144,264.989717 L1144,99 L934.662717,99 L1116.42279,218.92692 L964.517788,264.069296 L1144,264.989717 Z" id="Rectangle_1746_copy" stroke="#AEF7AE" stroke-width="4"></path>
+                    <path d="M2,2.02061801 L2,217 L215.757416,217 L26.1313597,47.675978 L181.082294,3.85735949 L2,2.02061801 Z" id="Rectangle_1746_copy-2" stroke="#AEF7AE" stroke-width="4"></path>
+                    <g id="new_banner_base">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <path stroke="#AEF7AE" stroke-width="4" d="M25,49 L25,263.910658 L1119,216.085522 L1119,49 L25,49 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
