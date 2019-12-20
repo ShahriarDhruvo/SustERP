@@ -1,6 +1,6 @@
 body {
     font-family: 'Open Sans', Arial, sans-serif;
-    background-image: url("/Img/Designs/HomePage_background.svg"), url("/Img/Designs/green-banner.svg");
+    background-image: url("Img/Designs/HomePage_background.svg"), url("Img/Designs/green-banner.svg");
     background-repeat: repeat-x, no-repeat;
     background-size: 30%, 25%;
     background-position-x: 0, 50%;
