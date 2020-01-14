@@ -1,30 +1,17 @@
 body {
     font-family: 'Open Sans', Arial, sans-serif;
-    background-image: url("/Img/Designs/HomePage_background.svg"), url("/Img/Designs/green-banner.svg");
+    background-image: url("Img/Designs/HomePage_background.svg"), url("Img/Designs/green-banner.svg");
     background-repeat: repeat-x, no-repeat;
     background-size: 30%, 25%;
     background-position-x: 0, 50%;
-    background-position-y: 100%, 16%;
+    background-position-y: 100%, 5%;
 
-}
-
-.topBorder {
-    overflow: hidden;
-    padding-top: 1.3%;
-    padding-left: 1.3%;
-    padding-right: 1.3%;
-    /* background-color: rgb(243, 243, 243); */
-    /* border: 1px solid #e7e7e7; */
-}
-
-.topBorder img {
-    float: left;
-    padding: 0px 50px 0px 120px;
 }
 
 h1 {
     text-align: center;
     color: dodgerblue;
+    padding-top: 4%;
 }
 
 p {

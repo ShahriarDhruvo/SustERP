@@ -42,7 +42,8 @@ body {
 }
 
 #myAccount {
-    padding-top: 48px;   
+    padding-top: 20px;  
+    padding-right: 150px; 
     float: right; 
 }
 
