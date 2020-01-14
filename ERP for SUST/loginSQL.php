@@ -1,33 +1,29 @@
-<?php
-     
-     session_start();
+<?php  
+    session_start();
 
-   $conn = mysqli_connect("localhost", "root", "", "demo");
-   if(!$conn){
-       echo ("Error Cinnection:".mysqli_connect_error());
-   }
+    $conn = mysqli_connect("localhost", "root", "", "demo");
+    if(!$conn){
+        echo ("Error Cinnection:".mysqli_connect_error());
+    }
 
-   if(isset($_POST['submit'])){
-       $name = $_POST['uname'];
-       $pass = $_POST['psw'];
+    if(isset($_POST['submit'])){
+        $name = $_POST['uname'];
+        $pass = $_POST['psw'];
 
-       $sql="select * from table1 where Username='$name' and password='$pass'";
-       
-       $result = mysqli_query($conn,$sql);
-       $count = mysqli_num_rows($result);
+        $sql="select * from table1 where Username='$name' and password='$pass'";
+        
+        $result = mysqli_query($conn,$sql);
+        $count = mysqli_num_rows($result);
 
-       if($count==1){
-           $_SESSION['name']=$name;
-           header('Location: indexSQL.php');
-       }
-       else{
-           echo "<h1> Sorry Buddy, Invalid Username or Password</h1>";
-       }
-   }
-
+        if($count==1){
+            $_SESSION['name']=$name;
+            header('Location: indexSQL.php');
+        }
+        else{
+            echo "<h1> Sorry Buddy, Invalid Username or Password </h1>";
+        }
+    }
 ?>
-
-
 
 <html lang="en">
 <head>
@@ -39,7 +35,12 @@
     <link rel="stylesheet" href="StyleSheets/logIn.css">
 </head>
 <body>
-    <div>
+
+    <div class="topBorder">  
+        <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
+    </div>
+
+    <div class="main-container">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
             <div class="imgcontainer">
                 <img src="Img/Avatars/LogIn_avatar.png" alt="Avatar" class="avatar">

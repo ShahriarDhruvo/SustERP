@@ -11,7 +11,7 @@
 
     <div class="topBorder">  
 
-        <img src="Img/Logos/logo2.png" style="width:120px">
+        <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
 
         <div class="infoBorder">
             <a href="https://www.sust.edu/">My Campus</a>
@@ -36,9 +36,12 @@
                     </div>
         
                     <div class="flip-card-back">
-                        <h1>John Doe</h1> 
-                        <p>Teacher</p> 
-                        <p>We love that guy</p>
+                        <ul>
+                            <li><a href="">Add Assignment</a></li>
+                            <li><a href="">Add Attendance</a></li>
+                            <li><a href="">Add Result</a></li>
+                            <li><a href="">View Event</a></li>
+                        </ul>
                     </div>
                     
                 </div>
@@ -55,9 +58,13 @@
                     </div>
         
                     <div class="flip-card-back">
-                        <h1>SED</h1> 
-                        <p>Student</p> 
-                        <p>I love myself</p>
+                        <ul>
+                            <li><a href="">View Assignment</a></li>
+                            <li><a href="">View Attendance</a></li>
+                            <li><a href="">View Time-table</a></li>
+                            <li><a href="">View Result</a></li>
+                            <li><a href="">View Event</a></li>
+                        </ul>
                     </div>
                     
                 </div>
@@ -74,9 +81,13 @@
                     </div>
         
                     <div class="flip-card-back">
-                        <h1>Rahim</h1> 
-                        <p>Librarian</p> 
-                        <p>He love himself</p>
+                        <ul>
+                            <li><a href="">Add Books</a></li>
+                            <li><a href="">Request a book</a></li>
+                            <li><a href="">Issue a book</a></li>
+                            <li><a href="">Return a book</a></li>
+                            <li><a href="">View Event</a></li>
+                        </ul>
                     </div>
                     
                 </div>

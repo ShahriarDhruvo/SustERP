@@ -1,6 +1,6 @@
 body {
     font-family: 'Open Sans', Arial, sans-serif;
-    background-image: url("/Img/Designs/HomePage_background.svg");
+    background-image: url("../Img/Designs/HomePage_background.svg");
     background-repeat: repeat-x;
     background-size: 30%;
     background-position-y: 100%;
@@ -47,7 +47,7 @@ body {
 }
 
 #myAccount::before {
-    background-image: url("/Img/Designs/myAccount-logo.png");
+    background-image: url("../Img/Designs/myAccount-logo.png");
     background-size: 25px 20px;
     background-repeat: no-repeat;
     display: inline-block;
