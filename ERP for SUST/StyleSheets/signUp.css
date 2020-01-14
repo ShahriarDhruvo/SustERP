@@ -1,24 +1,6 @@
 body {
     font-family: 'Open Sans', Arial, sans-serif;
-}
-
-.container {
-    padding: 0% 30% 0% 31%;
-    /* padding: 16px; */
-}
-
-.topBorder {
-    overflow: hidden;
-    padding-top: 1.3%;
-    padding-left: 1.3%;
-    padding-right: 1.3%;
-    /* background-color: rgb(243, 243, 243); */
-    /* border: 1px solid #e7e7e7; */
-}
-
-.topBorder img {
-    float: left;
-    padding: 0px 50px 0px 120px;
+    padding: 0% 30% 0% 30%;
 }
 
 input[type=text], input[type=password] {
@@ -70,4 +52,8 @@ button:hover {
 .cancelbtn, .signupbtn {
     float: left;
     width: 20%;
+}
+
+.container {
+    padding: 16px;
 }
