@@ -126,6 +126,17 @@ body {
     background-color: #2e90e0;
     color: white;
     transform: rotateY(180deg);
+    padding-right: 45px;
+}
+
+.flip-card-back ul {
+    list-style-type: none;
+}
+
+.flip-card-back ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
 }
 
 /* Copied From Bootstrap */
