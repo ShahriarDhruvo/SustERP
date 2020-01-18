@@ -45,7 +45,7 @@
                         echo 'alert("An error occured while saving the data!\nTry again after sometime.")';
                         echo '</script>';
                     }
-                    header("refresh: 0.75; url = login.php");
+                    header("refresh: 0.5; url = login.php");
                 }
             }
         ?>
@@ -102,8 +102,8 @@
             
             <br>
 
-            <label for="session"><b>Session</b></label>
-            <input type="text" placeholder="Enter Session" name="session">
+            <label for="session"><b>Batch</b></label>
+            <input type="number" placeholder="Enter Session" name="session">
             
             <label for="email"><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="email" required>

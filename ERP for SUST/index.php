@@ -72,9 +72,9 @@
                             <?php 
                                 if(($occupation == "teacher" || $occupation == "admin") && $login){
                                     echo '<br><br><br>
-                                    <li><a href="Data/Teacher/addAssignment.php">Add Assignment</a></li>
+                                    <li><a target="_blank" href="Data/Teacher/addAssignments.php">Add Assignment</a></li>
                                     <br>
-                                    <li><a href="">Add Attendance</a></li>
+                                    <li><a target="_blank" href="Data/Teacher/addAttendance.php">Add Attendance</a></li>
                                     <br>
                                     <li><a href="">Add Result</a></li>
                                     <br>
@@ -102,9 +102,9 @@
                             <?php 
                                 if(($occupation == "student" || $occupation == "admin") && $login){
                                     echo '<br><br>
-                                    <li><a href="">View Assignment</a></li>
+                                    <li><a target="_blank" href="Data/Student/viewAssignments.php">View Assignment</a></li>
                                     <br>
-                                    <li><a href="">View Attendance</a></li>
+                                    <li><a target="_blank" href="Data/Student/viewAttendance.php">View Attendance</a></li>
                                     <br>
                                     <li><a href="">View Time-table</a></li>
                                     <br>

@@ -29,8 +29,10 @@
 
                 if($count){
                     $rows = mysqli_fetch_assoc($result);
-                    $_SESSION['name'] = $rows['UserName'];
                     $_SESSION['login'] = true;
+                    $_SESSION['department'] = $rows['Department'];
+                    $_SESSION['batch'] = $rows['Sess'];
+                    $_SESSION['name'] = $rows['UserName'];
                     $_SESSION['occupation'] = $rows['Occupation'];
 
                     header('Location: index.php');
