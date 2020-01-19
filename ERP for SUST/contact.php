@@ -36,7 +36,7 @@
     </div>
 
     <footer class="Copyright">
-        <small>&copy; 2019 "ERP for SUST" All rights reserved.</small>
+        <small>&copy; 2019-<?php echo date("Y") ?> "ERP for SUST" All rights reserved.</small>
     </footer>
 </body>
 </html>

@@ -26,7 +26,7 @@
         <div class="infoBorder">
             <a href="https://www.sust.edu/">My Campus</a>
             <a href="about.html">About</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.php">Contact Us</a>
         </div>
         
         <div id="myAccount">
@@ -76,9 +76,9 @@
                                     <br>
                                     <li><a target="_blank" href="Data/Teacher/addAttendance.php">Add Attendance</a></li>
                                     <br>
-                                    <li><a href="">Add Result</a></li>
+                                    <li><a target="_blank" href="Data/Teacher/addResults.php">Add Result</a></li>
                                     <br>
-                                    <li><a href="">View Event</a></li>';
+                                    <li><a target="_blank" href="Data/Teacher/addEvents.php">Add Event</a></li>';
                                 } 
                                 else if(!$login)
                                     echo "<h4><br><br><br><br><br><br>Log In into your account first.</h4>";
@@ -101,16 +101,15 @@
                         <ul>
                             <?php 
                                 if(($occupation == "student" || $occupation == "admin") && $login){
-                                    echo '<br><br>
+                                    echo '<br><br><br>
                                     <li><a target="_blank" href="Data/Student/viewAssignments.php">View Assignment</a></li>
                                     <br>
                                     <li><a target="_blank" href="Data/Student/viewAttendance.php">View Attendance</a></li>
                                     <br>
                                     <li><a href="">View Time-table</a></li>
                                     <br>
-                                    <li><a href="">View Result</a></li>
-                                    <br>
-                                    <li><a href="">View Event</a></li>';
+                                    <li><a target="_blank" href="Data/Student/viewResults.php">View Result</a></li>
+                                    ';
                                 } 
                                 else if(!$login)
                                     echo "<h4><br><br><br><br><br><br>Log In into your account first.</h4>";
@@ -135,7 +134,7 @@
                         <ul>
                             <?php 
                                 if(($occupation == "librarian" || $occupation == "admin") && $login){
-                                    echo '<br><br>
+                                    echo '<br><br><br>
                                     <li><a href="">Add Books</a></li>
                                     <br>
                                     <li><a href="">Request a book</a></li>
@@ -143,8 +142,7 @@
                                     <li><a href="">Issue a book</a></li>
                                     <br>
                                     <li><a href="">Return a book</a></li>
-                                    <br>
-                                    <li><a href="">View Event</a></li>';
+                                    ';
                                 } 
                                 else if(!$login)
                                     echo "<h4><br><br><br><br><br><br>Log In into your account first.</h4>";
@@ -156,6 +154,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="button">
+        <button class="btn" onclick="window.open('viewEvents.php', '_blank')">View Events <span class='caret'></span></button>
     </div>
 
     <script

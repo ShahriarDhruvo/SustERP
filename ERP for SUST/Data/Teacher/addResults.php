@@ -24,7 +24,6 @@
 
 	// Initialize message variable
 	$msg = "";
-	$submission_time = date("d/m/Y")." ".date("l")." ".date("h:i:sa");
 
 	// If upload button is clicked ...
 	if (isset($_POST['upload'])){
@@ -33,7 +32,6 @@
 			$batch = $_POST['batch'];
 			$year_semes = $_POST['year_semes'];
 			$course_name = $_POST['course_name'];
-			$submission_time = $_POST['time'];
 			
 			if($department != $department_s && $occupation_s != "admin")
 				echo "<h2>You cannot upload files other than your department's.</h2>";
@@ -41,22 +39,19 @@
 				// Get file name
 				$name = $_FILES['files']['name'];
 
-				$data = mysqli_query($db, "SELECT MAX(id) FROM assignments");
+				$data = mysqli_query($db, "SELECT MAX(id) FROM results");
 				$inc = mysqli_fetch_row($data);
 				$id = $inc[0] + 1;
 
 				$file = "(".$id.")_".$name;
 				
 				$time = date("d/m/Y")." ".date("l")." ".date("h:i:sa");
-				
-				// Get text
-				$comment = mysqli_real_escape_string($db, $_POST['comment']);
 
 				if(!empty($name)){
 					// file directory
-					$target = "../files/assignments/".basename($file);
+					$target = "../files/results/".basename($file);
 
-					$sql = "INSERT INTO assignments (date, uploaders_name, department_name, course_name, batch_year, semester, files, submission_date, comments) VALUES ('$time', '$name_s', '$department', '$course_name', '$batch', '$year_semes', '$file', '$submission_time', '$comment')";
+					$sql = "INSERT INTO results (date, uploaders_name, department_name, course_name, batch_year, semester, files) VALUES ('$time', '$name_s', '$department', '$course_name', '$batch', '$year_semes', '$file')";
 					
 					// execute query
 					if(!mysqli_query($db, $sql))
@@ -71,7 +66,7 @@
 					echo 'alert("'.$msg.'")';
 					echo '</script>';
 
-					header("refresh: 0.5; url = addAssignments.php");
+					header("refresh: 0.5; url = addResults.php");
 				}
 				else{
 					echo '<script language="javascript">';
@@ -82,7 +77,7 @@
 		}
 		else echo "<h2>Log in into your account first.</h2>";
 	}
-	$result = mysqli_query($db, "SELECT * FROM assignments");
+	$result = mysqli_query($db, "SELECT * FROM results");
 	$authorization = true;
 
 	if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
@@ -91,7 +86,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Upload Assignments</title>
+		<title>Upload Results</title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,23 +94,24 @@
 	</head>
 	<body>
 		<div id="content">
+            <h1>Shahjalal University of Science & Technology.</h1>
 			<?php
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $db)
-					echo "<h2>Sorry buddy, you haven't uploaded any attendance yet.....</h2>";
+					echo "<h2>Sorry buddy, you haven't uploaded any result yet.....</h2>";
 				else if($login_s && $authorization && $db){
 					while ($row = mysqli_fetch_array($result)){
 						if(($occupation_s == "teacher" && $department_s == $row['department_name']) || ($occupation_s == "admin")){
 							$your_assignment = false;
-							$path = "../files/assignments/".$row['files'];
+							$path = "../files/results/".$row['files'];
 							echo "<div id='file_div'>";
-								echo "<embed src='$path'></embed>";
 								echo "<p>Time: ".$row['date']."<br>Uploaded By: ".$row['uploaders_name']."<br>Department: ".$row['department_name']."<br>Course name: ".$row['course_name']."<br>Batch: ".$row['batch_year']."<br>Semester: ".$row['semester']."<br>File name: 
-								".$row['files']."<br>Submission date: ".$row['submission_date']."<br>Comment: ".$row['comments']."</p>";
+                                ".$row['files']."</p>";
+                                echo "<embed src='$path'></embed>";
 								echo "<div>";
-									echo "<form target='_blank' action='../files/assignments/".$row['files']."'>";
+									echo "<form target='_blank' action='../files/results/".$row['files']."'>";
 										echo "<button type='submit'>View</button>";
 									echo "</form>";
-									echo "<form method='POST' action='addAssignments.php' enctype='multipart/form-data'>";
+									echo "<form method='POST' action='addResults.php' enctype='multipart/form-data'>";
 										echo "<input type='hidden' name='id' value='".$row['id']."'>";
 										echo "<input type='hidden' name='files' value='".$row['files']."'>";
 										echo "<button type='submit' name='delete'>Delete</button>";
@@ -124,15 +120,15 @@
 							echo "</div>";
 						}
 					}
-					if($your_assignment) echo "<h2>Sorry buddy, you haven't uploaded any attendance yet.....</h2>";
+					if($your_assignment) echo "<h2>Sorry buddy, you haven't uploaded any result yet.....</h2>";
 				}
 
 				if(isset($_POST['delete'])){
 					$file_id = $_POST['id'];
 					$file_name = ucfirst($_POST['files']);
-					$path = "../files/assignments/".$_POST['files'];
+					$path = "../files/results/".$_POST['files'];
 
-					$sql = "DELETE FROM assignments WHERE id=$file_id";
+					$sql = "DELETE FROM results WHERE id=$file_id";
 			
 					if (mysqli_query($db, $sql) && unlink($path)){
 						echo '<script language="javascript">';
@@ -144,10 +140,10 @@
                         	echo 'alert("Error deleting '.$file_name.'")';
                         echo '</script>';
 					}
-					header("refresh: 0.5; url = addAssignments.php");
+					header("refresh: 0.5; url = addResults.php");
 				}
 			?>
-			<form method="POST" action="addAssignments.php" enctype="multipart/form-data">
+			<form method="POST" action="addResults.php" enctype="multipart/form-data">
 				<?php
 					if(!$login_s && $db) echo "<h2>Log in into your account first.</h2>";
 					else if(!$authorization && $db) echo "<h2>You are not authorize to see the contents of this page.</h2>";
@@ -173,21 +169,10 @@
 							<label><b>Year/Semester</b></label>
 							<input type="text" placeholder="Enter Semester year/semester format" name="year_semes" required>
 
-							<label><b>Course name</b></label>
+							<label><b>Course name </b></label>
 							<input type="text" placeholder="Enter the course name" name="course_name" required>
 
-							<label><b>Submission date</b></label>
-							<input type="text" placeholder="Date" name="time" value="'.$submission_time.'" required>
-
 							<input type="file" name="files">
-						</div>
-						<div>
-							<textarea 
-								id="text" 
-								cols="40" 
-								rows="4" 
-								name="comment" 
-								placeholder="Leave a comment..."></textarea>
 						</div>
 						<div>
 							<button type="submit" name="upload">Upload</button>

@@ -1,9 +1,13 @@
 body {
     font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.container {
     background-image: url("../Img/Designs/HomePage_background.svg");
     background-repeat: repeat-x;
     background-size: 30%;
-    background-position-y: 100%;
+    background-position-y: 95%;
+    height: 700px;
 }
 
 .topBorder {
@@ -151,4 +155,20 @@ body {
     border-top: 4px solid\9;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
+}
+
+.button {
+    text-align: center;
+}
+
+.btn {
+    width: 95%;
+    background-color: transparent;
+    color: #0084ff;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 2px solid #0084ff;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.9;
 }

@@ -37,12 +37,12 @@
 
                     if($result){
                         echo '<script language="javascript">';
-                        echo 'alert("You have successfully created an account.")';
+                            echo 'alert("You have successfully created an account.")';
                         echo '</script>';
                     }
                     else{
                         echo '<script language="javascript">';
-                        echo 'alert("An error occured while saving the data!\nTry again after sometime.")';
+                            echo 'alert("An error occured while saving the data!\nTry again after sometime.")';
                         echo '</script>';
                     }
                     header("refresh: 0.5; url = login.php");
@@ -106,7 +106,7 @@
             <input type="number" placeholder="Enter Session" name="session">
             
             <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required>
         
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
