@@ -122,7 +122,7 @@
 						<input type="hidden" name="size" value="10000000">
 						<div>  
 							<div class="form-group"> 
-								<label class=""><b>Department</b></label>
+								<label><b>Department</b></label>
 								<select class="form-control" name="department">
 									<option value="SWE" selected="selected">SWE</option>
 									<option value="CSE">CSE</option>

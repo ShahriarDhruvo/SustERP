@@ -19,7 +19,7 @@
 		</style>
 	</head>
 	<body>
-		<div id="container">
+		<div class="container">
 			<?php
 				ini_set('upload_max_filesize', '10M');
 				ini_set('post_max_size', '10M');
@@ -50,17 +50,17 @@
 				// If upload button is clicked ...
 				if (isset($_POST['upload'])){
 					if($login_s && $db){
-						$department = $_POST['department'];
-						$batch = $_POST['batch'];
-						$year_semes = $_POST['year_semes'];
-						$course_name = $_POST['course_name'];
-						$time = $_POST['time'];
+						$department = htmlspecialchars($_POST['department']);
+						$batch = htmlspecialchars($_POST['batch']);
+						$year_semes = htmlspecialchars($_POST['year_semes']);
+						$course_name = htmlspecialchars($_POST['course_name']);
+						$time = htmlspecialchars($_POST['time']);
 						
 						if($department != $department_s && $occupation_s != "admin")
 							echo "<h2>You cannot upload files other than your department's.</h2>";
 						else{
 							// Get file name
-							$name = $_FILES['files']['name'];
+							$name = htmlspecialchars($_FILES['files']['name']);
 			
 							$data = mysqli_query($db, "SELECT MAX(id) FROM attendance");
 							$inc = mysqli_fetch_row($data);
@@ -69,7 +69,7 @@
 							$file = "(".$id.")_".$name;
 							
 							// Get text
-							$comment = mysqli_real_escape_string($db, $_POST['comment']);
+							$comment = htmlspecialchars(mysqli_real_escape_string($db, $_POST['comment']));
 			
 							if(!empty($name)){
 								// file directory
@@ -105,9 +105,73 @@
 				$authorization = true;
 			
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
+			?>
 
-				echo "<h3><br>Upload an attendance<br><br></h3>";
+			<h3><br>Upload an attendance<br><br></h3>
 
+			<form method="POST" action="addAttendance.php" enctype="multipart/form-data" class="card card-body bg-light">
+				<?php
+					if(!$login_s && $db) echo "<h2>Log in into your account first.</h2>";
+					else if(!$authorization && $db) echo "<h2>You are not authorize to see the contents of this page.</h2>";
+					else if($db){
+						echo '
+						<input type="hidden" name="size" value="10000000">
+						<div>
+							<div class="form-group">   
+							<label><b>Department</b></label>
+								<select class="form-control" name="department">
+									<option value="SWE" selected="selected">SWE</option>
+									<option value="CSE">CSE</option>
+									<option value="EEE">EEE</option>
+									<option value="MEE">MEE</option>
+									<option value="CEE">CEE</option>
+									<option value="CEP">CEP</option>
+									<option value="IPE">IPE</option>
+									<option value="PME">PME</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label><b>Batch</b></label>
+								<input type="number" placeholder="Batch Year" name="batch" class="form-control">
+							</div>
+							<div class="form-group">
+								<label><b>Year/Semester</b></label>
+								<input type="text" placeholder="Enter Semester year/semester format" name="year_semes" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label><b>Course name</b></label>
+								<input type="text" placeholder="Enter the course name" name="course_name" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label><b>Date</b></label>
+								<input type="text" placeholder="Date" name="time" value="'.$time.'" class="form-control" required>
+							</div>
+							<div class="custom-file">
+								<input type="file" name="files" class="custom-file-input" id="inputGroupFile02" required>
+								<label class="custom-file-label" for="inputGroupFile02">Choose file...</label>
+							</div>
+						</div>
+						<div>
+							<br>
+							<textarea 
+								id="text" 
+								cols="40" 
+								rows="4" 
+								class="form-control"
+								name="comment" 
+								placeholder="Leave a comment..."></textarea><br>
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary" name="upload">Upload</button>
+						</div>
+						';
+					}
+				?>
+			</form>
+
+			<h3><br><br>Attendance<br><br></h3>
+
+			<?php
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $db)
 					echo "<h2>Sorry buddy, you haven't uploaded any attendance yet.....</h2>";
 				else if($login_s && $authorization && $db){
@@ -115,21 +179,33 @@
 						if(($occupation_s == "teacher" && $department_s == $row['department_name']) || ($occupation_s == "admin")){
 							$your_assignment = false;
 							$path = "../files/attendance/".$row['files'];
-							echo "<div id='file_div'>";
-								echo "<embed src='$path'></embed>";
-								echo "<p>Time: ".$row['date']."<br>Uploaded By: ".$row['uploaders_name']."<br>Department: ".$row['department_name']."<br>Course name: ".$row['course_name']."<br>Batch: ".$row['batch_year']."<br>Semester: ".$row['semester']."<br>File name: 
-								".$row['files']."<br>Comment: ".$row['comments']."</p>";
-								echo "<div>";
-									echo "<form target='_blank' action='../files/attendance/".$row['files']."'>";
-										echo "<button type='submit'>View</button>";
-									echo "</form>";
-									echo "<form method='POST' action='addAttendance.php' enctype='multipart/form-data'>";
-										echo "<input type='hidden' name='id' value='".$row['id']."'>";
-										echo "<input type='hidden' name='files' value='".$row['files']."'>";
-										echo "<button type='submit' name='delete'>Delete</button>";
-									echo "</form>";
+							echo "<div class='card card-body bg-light'>";
+								echo "<br>";
+								echo "<div class='row'>";
+									echo "<div class='col-sm-12 col-md-12 col-lg-4' style='margin-left: 15px;'>";
+										echo "<embed width='430px' height='250px' src='$path'></embed>";
+									echo "</div>";
+									echo "<div class='col-sm-12 col-md-12 col-lg-5 pull-center' style='margin-left: 90px'>";
+										echo "<br><p><b>Time: </b>".$row['date']."<br><b>Uploaded By: </b>".ucfirst($row['uploaders_name'])."<br><b>Department: </b>".$row['department_name'].
+										"<br><b>Course name: </b>".ucfirst($row['course_name'])."<br><b>Batch: </b>".$row['batch_year']."<br><b>Semester: </b>".$row['semester']."<br><b>File name: </b>
+										".$row['files']."</p>";
+									echo "</div>";
+									echo "<div>";
+										echo "<div class='text-right'>";
+											echo "<form method='POST' action='addAttendance.php' enctype='multipart/form-data'>";
+												echo "<a class='btn btn-info' target='_blank' href='../files/attendance/".$row['files']."' style='padding-right: 17px; padding-left: 17px;'>View</a>";
+												echo "<input type='hidden' name='id' value='".$row['id']."'>";
+												echo "<input type='hidden' name='files' value='".$row['files']."'>";
+												echo "<button type='submit' class='btn btn-danger' name='delete' style='margin: 0px 5px 0px 5px;'>Delete</button>";
+											echo "</form>";
+										echo "</div>";
+									echo "</div>";
+								echo "</div>";
+								echo "<div class='col-lg-12'>";
+									echo "<br><b>Comment: </b>".ucfirst($row['comments'])."</p>";
 								echo "</div>";
 							echo "</div>";
+							echo "<br>";
 						}
 					}
 					if($your_assignment) echo "<h2>Sorry buddy, you haven't uploaded any attendance yet.....</h2>";
@@ -144,66 +220,26 @@
 			
 					if (mysqli_query($db, $sql) && unlink($path)){
 						echo '<script language="javascript">';
-                        	echo 'alert("'.$file_name.' deleted successfully.")';
-                        echo '</script>';
+							echo 'alert("'.$file_name.' deleted successfully.")';
+						echo '</script>';
 					}
 					else{
 						echo '<script language="javascript">';
-                        	echo 'alert("Error deleting '.$file_name.'")';
-                        echo '</script>';
+							echo 'alert("Error deleting '.$file_name.'")';
+						echo '</script>';
 					}
-					header("refresh: 0.5; url = addAttendance.php");
+					// header("refresh: 0.5; url = addAttendance.php");
+					echo "<script>location.href='addAttendance.php'</script>";
 				}
 			?>
-			<form method="POST" action="addAttendance.php" enctype="multipart/form-data">
-				<?php
-					if(!$login_s && $db) echo "<h2>Log in into your account first.</h2>";
-					else if(!$authorization && $db) echo "<h2>You are not authorize to see the contents of this page.</h2>";
-					else if($db){
-						echo '
-						<input type="hidden" name="size" value="10000000">
-						<div>   
-							<label class=""><b>Department</b></label>
-							<select class="" name="department">
-								<option value="SWE" selected="selected">SWE</option>
-								<option value="CSE">CSE</option>
-								<option value="EEE">EEE</option>
-								<option value="MEE">MEE</option>
-								<option value="CEE">CEE</option>
-								<option value="CEP">CEP</option>
-								<option value="IPE">IPE</option>
-								<option value="PME">PME</option>
-							</select>
-
-							<label><b>Batch</b></label>
-							<input type="number" placeholder="Batch Year" name="batch">
-
-							<label><b>Year/Semester</b></label>
-							<input type="text" placeholder="Enter Semester year/semester format" name="year_semes" required>
-
-							<label><b>Course name </b></label>
-							<input type="text" placeholder="Enter the course name" name="course_name" required>
-
-							<label><b>Date</b></label>
-							<input type="text" placeholder="Date" name="time" value="'.$time.'" required>
-
-							<input type="file" name="files">
-						</div>
-						<div>
-							<textarea 
-								id="text" 
-								cols="40" 
-								rows="4" 
-								name="comment" 
-								placeholder="Leave a comment..."></textarea>
-						</div>
-						<div>
-							<button type="submit" name="upload">Upload</button>
-						</div>
-						';
-					}
-				?>
-			</form>
 		</div>
+		<script>
+            $('#inputGroupFile02').on('change',function(){
+                //get the file name
+                let fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
 	</body>
 </html>
