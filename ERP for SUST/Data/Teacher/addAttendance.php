@@ -1,102 +1,113 @@
-<?php
-	ini_set('upload_max_filesize', '10M');
-	ini_set('post_max_size', '10M');
-	ini_set('max_input_time', 300);
-	ini_set('max_execution_time', 300);
-	date_default_timezone_set('Asia/Dhaka');
-
-	session_start();
-	$login_s = false;
-	$your_assignment = true;
-    $occupation_s = null;
-	$department_s = null;
-    if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
-		$login_s = $_SESSION['login']; 
-		$name_s = $_SESSION['name'];
-        $occupation_s = $_SESSION['occupation'];
-        $department_s = $_SESSION['department'];
-    }
-
-	// Create database connection
-	if(!($db = mysqli_connect("localhost", "root", "", "erp_datas")))
-		echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>"; 
-
-	// Initialize message variable
-	$msg = "";
-	$time = date("d/m/Y")." ".date("l")." ".date("h:i:sa");
-
-	// If upload button is clicked ...
-	if (isset($_POST['upload'])){
-		if($login_s && $db){
-			$department = $_POST['department'];
-			$batch = $_POST['batch'];
-			$year_semes = $_POST['year_semes'];
-			$course_name = $_POST['course_name'];
-			$time = $_POST['time'];
-			
-			if($department != $department_s && $occupation_s != "admin")
-				echo "<h2>You cannot upload files other than your department's.</h2>";
-			else{
-				// Get file name
-				$name = $_FILES['files']['name'];
-
-				$data = mysqli_query($db, "SELECT MAX(id) FROM attendance");
-				$inc = mysqli_fetch_row($data);
-				$id = $inc[0] + 1;
-
-				$file = "(".$id.")_".$name;
-				
-				// Get text
-				$comment = mysqli_real_escape_string($db, $_POST['comment']);
-
-				if(!empty($name)){
-					// file directory
-					$target = "../files/attendance/".basename($file);
-
-					$sql = "INSERT INTO attendance (date, uploaders_name, department_name, batch_year, semester, course_name, files, comments) VALUES ('$time', '$name_s', '$department', '$batch', '$year_semes', '$course_name', '$file', '$comment')";
-					
-					// execute query
-					if(!mysqli_query($db, $sql))
-						echo "There is an error while quering.";
-
-					if(move_uploaded_file($_FILES['files']['tmp_name'], $target))
-						$msg = "File uploaded successfully";
-					else
-						$msg = "Failed to upload the file, Try again later.";
-
-					echo '<script language="javascript">';
-					echo 'alert("'.$msg.'")';
-					echo '</script>';
-
-					header("refresh: 0.5; url = addAttendance.php");
-				}
-				else{
-					echo '<script language="javascript">';
-						echo 'alert("Select a file to upload!")';
-					echo '</script>';
-				}
-			}
-		}
-		else echo "<h2>Log in into your account first.</h2>";
-	}
-	$result = mysqli_query($db, "SELECT * FROM attendance");
-	$authorization = true;
-
-	if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Upload Attendance</title>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="../../StyleSheets/addAssignments.css">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+		<link rel="stylesheet" href="../../StyleSheets/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="../../Scripts/bootstrap.min.js"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
+		<style>
+			h2, h3 {
+				text-align: center;
+			}
+		</style>
 	</head>
 	<body>
-		<div id="content">
+		<div id="container">
 			<?php
+				ini_set('upload_max_filesize', '10M');
+				ini_set('post_max_size', '10M');
+				ini_set('max_input_time', 300);
+				ini_set('max_execution_time', 300);
+				date_default_timezone_set('Asia/Dhaka');
+			
+				session_start();
+				$login_s = false;
+				$your_assignment = true;
+				$occupation_s = null;
+				$department_s = null;
+				if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
+					$login_s = $_SESSION['login']; 
+					$name_s = $_SESSION['name'];
+					$occupation_s = $_SESSION['occupation'];
+					$department_s = $_SESSION['department'];
+				}
+			
+				// Create database connection
+				if(!($db = mysqli_connect("localhost", "root", "", "erp_datas")))
+					echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>"; 
+			
+				// Initialize message variable
+				$msg = "";
+				$time = date("d/m/Y")." ".date("l")." ".date("h:i:sa");
+			
+				// If upload button is clicked ...
+				if (isset($_POST['upload'])){
+					if($login_s && $db){
+						$department = $_POST['department'];
+						$batch = $_POST['batch'];
+						$year_semes = $_POST['year_semes'];
+						$course_name = $_POST['course_name'];
+						$time = $_POST['time'];
+						
+						if($department != $department_s && $occupation_s != "admin")
+							echo "<h2>You cannot upload files other than your department's.</h2>";
+						else{
+							// Get file name
+							$name = $_FILES['files']['name'];
+			
+							$data = mysqli_query($db, "SELECT MAX(id) FROM attendance");
+							$inc = mysqli_fetch_row($data);
+							$id = $inc[0] + 1;
+			
+							$file = "(".$id.")_".$name;
+							
+							// Get text
+							$comment = mysqli_real_escape_string($db, $_POST['comment']);
+			
+							if(!empty($name)){
+								// file directory
+								$target = "../files/attendance/".basename($file);
+			
+								$sql = "INSERT INTO attendance (date, uploaders_name, department_name, batch_year, semester, course_name, files, comments) VALUES ('$time', '$name_s', '$department', '$batch', '$year_semes', '$course_name', '$file', '$comment')";
+								
+								// execute query
+								if(!mysqli_query($db, $sql))
+									echo "There is an error while quering.";
+			
+								if(move_uploaded_file($_FILES['files']['tmp_name'], $target))
+									$msg = "File uploaded successfully";
+								else
+									$msg = "Failed to upload the file, Try again later.";
+			
+								echo '<script language="javascript">';
+								echo 'alert("'.$msg.'")';
+								echo '</script>';
+			
+								header("refresh: 0.5; url = addAttendance.php");
+							}
+							else{
+								echo '<script language="javascript">';
+									echo 'alert("Select a file to upload!")';
+								echo '</script>';
+							}
+						}
+					}
+					else echo "<h2>Log in into your account first.</h2>";
+				}
+				$result = mysqli_query($db, "SELECT * FROM attendance");
+				$authorization = true;
+			
+				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
+
+				echo "<h3><br>Upload an attendance<br><br></h3>";
+
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $db)
 					echo "<h2>Sorry buddy, you haven't uploaded any attendance yet.....</h2>";
 				else if($login_s && $authorization && $db){
