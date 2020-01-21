@@ -35,7 +35,7 @@
                     echo "<span class='dropdown' style='padding: 0px 250px 0px 0px; color: rgb(94, 94, 94); text-decoration: none; cursor: pointer'> 
                         ".htmlspecialchars($name)."<span class='caret'></span>
                         <div>
-                            <ul class='toggle' style='display:none; cursor: pointer'>
+                            <ul class='toggle' style='display: none; cursor: pointer'>
                                 <li><a href='logout.php'>Log Out</a></li>
                             </ul>
                         </div> 
@@ -155,9 +155,12 @@
             </div>
         </div>
     </div>
-    <div class="button">
-        <button class="btn" onclick="window.open('viewEvents.php', '_blank')">View Events <span class='caret'></span></button>
+
+    <div class="button showEvent">
+        <button class="btn">View Events <span class='caret'></span></button>
     </div>
+
+    <div include-html="viewEvents.php" class="eventToggle" style="display: none;"></div>
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.js"
@@ -166,6 +169,40 @@
     </script>
 
     <script>
+        $(".showEvent").click(
+            function includeHTML(){
+                let z, i, elmnt, file, xhttp;
+                /*loop through a collection of all HTML elements:*/
+                z = document.getElementsByTagName("*");
+
+                $(".eventToggle").fadeToggle(1000);
+                window.scrollTo(0, window.innerHeight);
+
+                for (i=0; i<z.length; i++) {
+                    elmnt = z[i];
+                    /*search for elements with a certain atrribute:*/
+                    file = elmnt.getAttribute("include-html");
+                    if(file){
+                        /*make an HTTP request using the attribute value as the file name:*/
+                        xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function(){
+                            if (this.readyState == 4){
+                                if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                                if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                                /*remove the attribute, and call this function once more:*/
+                                elmnt.removeAttribute("include-html");
+                                includeHTML();
+                            }
+                        }      
+                        xhttp.open("GET", file, true);
+                        xhttp.send();
+                        /*exit the function:*/
+                        return;
+                    }
+                }
+            }
+        );
+
         $(".dropdown").click(function(){
             $(".toggle").fadeToggle(1000);
         });
