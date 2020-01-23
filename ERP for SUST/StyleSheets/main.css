@@ -1,0 +1,17 @@
+@import 'bootstrap.min.css';
+
+body {
+    background-image: url("../Img/Designs/HomePage_background.svg"), url("../Img/Designs/HomePage_background.svg");
+    background-position-x: 0%, 100%;
+    background-repeat: repeat-y;
+    background-size: 13%;
+    /* background-position-y: 68%; */
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.navbar-nav li {
+    padding-right: 10px;
+}

@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="StyleSheets/about.css">
 </head>
 <body>
-
+    <!-- header -->
+    <?php //include 'header.php' ?>
+    <!-- header -->
+    
     <div class="topBorder">  
         <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
     </div>

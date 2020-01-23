@@ -4,21 +4,18 @@
 		<title>Upload Events</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-		<link rel="stylesheet" href="../../StyleSheets/bootstrap.min.css">
+		<link rel="stylesheet" href="StyleSheets/main.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="../../Scripts/bootstrap.min.js"></script>
-		<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
-		<style>
-			h1, h2, h3 {
-				text-align: center;
-			}
-		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
+		<!-- header -->
+		<?php 
+			include 'header.php'; 
+		?>
+		<!-- header -->
+		
 		<div class="container">
 			<?php
 				ini_set('upload_max_filesize', '10M');
@@ -26,19 +23,6 @@
 				ini_set('max_input_time', 300);
 				ini_set('max_execution_time', 300);
 				date_default_timezone_set('Asia/Dhaka');
-
-				session_start();
-				$login_s = false;
-				$occupation_s = null;
-				$department_s = null;
-				$name_s = null; 
-				
-				if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
-					$login_s = $_SESSION['login'];
-					$name_s = $_SESSION['name'];
-					$department_s = $_SESSION['department']; 
-					$occupation_s = $_SESSION['occupation'];
-				}
 
 				// Create database connection
 				if(!($db = mysqli_connect("localhost", "root", "", "erp_datas")))
@@ -84,7 +68,7 @@
 							$_SESSION['event_attachment'] = true;
 
 						// file directory
-						$target = "../files/events/".basename($file);
+						$target = "Data/events/".basename($file);
 
 						$sql = "INSERT INTO events (date, ename, orname, edate, link, files, comments) VALUES ('$time', '$ename', '$orname', '$edate', '$link', '$file', '$comment')";
 						
@@ -111,7 +95,7 @@
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
 			?>
 
-			<h3><br>Upload an event<br><br></h3>
+			<h3>Upload an event<br><br></h3>
 
 			<form method="POST" action="addEvents.php" enctype="multipart/form-data" class="card card-body bg-light">
 				<?php
@@ -169,7 +153,7 @@
 				else if($login_s && $authorization && $db){
 					while ($row = mysqli_fetch_array($result)){
 						if(($occupation_s == "teacher") || ($occupation_s == "admin")){
-							$path = "../files/events/".$row['files'];
+							$path = "Data/events/".$row['files'];
 							echo "<div class='card card-body bg-light'>";
 								echo "<br>";
 								echo "<div class='row'>";
@@ -195,7 +179,7 @@
 									if($row['files'] != null){
 										// echo "<embed width='430px' height='250px' src='$path'></embed>";
 										echo "<div>";
-											echo "<a class='btn btn-info' target='_blank' href='../files/events/".$row['files']."' style='margin-left: 68px'>Attachment</a>";
+											echo "<a class='btn btn-info' target='_blank' href='Data/events/".$row['files']."' style='margin-left: 68px'>Attachment</a>";
 										echo "</div>";
 										echo "<div>";
 										echo "<form method='POST' action='addEvents.php' enctype='multipart/form-data'>";
@@ -226,7 +210,7 @@
 				if(isset($_POST['delete'])){
 					$file_id = $_POST['id'];
 					$file_name = ucfirst($_POST['files']);
-					$path = "../files/events/".$_POST['files'];
+					$path = "Data/events/".$_POST['files'];
 
 					$sql = "DELETE FROM events WHERE id=$file_id";
 					
