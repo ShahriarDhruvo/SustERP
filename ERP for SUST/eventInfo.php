@@ -19,6 +19,10 @@
 		</style>
 	</head>
 	<body>
+		<!-- header -->
+		<?php include 'header.php' ?>
+		<!-- header -->
+		
 		<div class="container">
 
             <h1><br>Shahjalal University of Science & Technology.<br><br></h1>

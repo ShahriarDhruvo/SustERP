@@ -1,91 +1,6 @@
-body {
-    font-family: 'Open Sans', Arial, sans-serif;
-}
-
-.container {
-    background-image: url("../Img/Designs/HomePage_background.svg");
-    background-repeat: repeat-x;
-    background-size: 30%;
-    background-position-y: 95%;
-    height: 700px;
-}
-
-.topBorder {
-    overflow: hidden;
-    padding: 1.3%;
-    /* background-color: rgb(243, 243, 243); */
-    /* border: 1px solid #e7e7e7; */
-}
-  
-.infoBorder a {
-    float: left;
-    color: rgb(94, 94, 94);
-    text-align: center; 
-    padding: 14px 20px;
-    padding-top: 60px;
-    text-decoration: none;
-}
-
-.topBorder img {
-    float: left;
-    padding: 0px 50px 0px 120px;
-}
-
-.topBorder a:hover:not(.active) {
-    color:rgb(0, 102, 255);
-}
-
-#myAccount a:hover:not(.active) {
-    color:rgb(0, 102, 255);
-}
-
-#myAccount span a {
-    text-decoration: none;
-    color: rgb(94, 94, 94);
-    padding: 0px 120px 0px 0px;
-}
-
-#myAccount {
-    padding-top: 48px;   
-    float: right; 
-}
-
-#myAccount::before {
-    background-image: url("../Img/Designs/myAccount-logo.png");
-    background-size: 25px 20px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 25px; 
-    height: 20px;
-    content: "";
-}
+@import 'main.css';
 
 .flip-card {
-    padding-left: 22%;
-    padding-right: 22%;
-    padding-top: 10%;
-}
-
-.teacher-flip-card {
-    float: left;
-    background-color: transparent;
-    width: 300px;
-    height: 300px;
-    perspective: 1000px;
-}
-
-.student-flip-card {
-    float: left;
-    padding-left: 7%;
-    background-color: transparent;
-    width: 300px;
-    height: 300px;
-    perspective: 1000px;
-}
-
-.librarian-flip-card {
-    float: left;
-    padding-left: 7%;
     background-color: transparent;
     width: 300px;
     height: 300px;
@@ -102,15 +17,7 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.teacher-flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.student-flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.librarian-flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
 }
 
@@ -139,36 +46,19 @@ body {
 
 .flip-card-back ul li a {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     color: white;
 }
 
-/* Copied From Bootstrap */
+/* Here is another field */
 
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px dashed;
-    border-top: 4px solid\9;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+#container01 {
+    /* margin-top: 10%; */
+    padding-left: 2.55%;
 }
 
-.button {
+.showEvent {
     text-align: center;
-}
-
-.btn {
-    width: 95%;
-    background-color: transparent;
-    color: #0084ff;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: 2px solid #0084ff;
-    border-radius: 5px;
-    cursor: pointer;
-    opacity: 0.9;
+    margin-top: 14%;
+    margin-bottom: 2%;
 }
