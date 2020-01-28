@@ -97,13 +97,13 @@
                                 <?php 
                                     if(($occupation_s == "librarian" || $occupation_s == "admin") && $login_s){
                                         echo '<br><br>
-                                        <li><a target="_blank" href="">Add Books</a></li>
+                                        <li><a target="_blank" href="addBook.php">Add Books</a></li>
                                         <br>
-                                        <li><a target="_blank" href="">Request a book</a></li>
+                                        <li><a target="_blank" href="issueBook.php">Issue Book</a></li>
                                         <br>
-                                        <li><a target="_blank" href="">Issue a book</a></li>
+                                        <li><a target="_blank" href="returnBook.php">Return Book</a></li>
                                         <br>
-                                        <li><a target="_blank" href="">Return a book</a></li>
+                                        <li><a target="_blank" href="displayBook.php">View Book</a></li>
                                         ';
                                     } 
                                     else if(!$login_s)
