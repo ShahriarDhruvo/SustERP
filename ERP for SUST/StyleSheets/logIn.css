@@ -1,4 +1,9 @@
-body {
+img {
+    width: 25%;
+    margin-bottom: 5%;
+}
+
+/* body {
     font-family: 'Open Sans', Arial, sans-serif;
 }
 
@@ -6,21 +11,12 @@ body {
     padding: 0.5% 30% 0% 30%;
 }
 
-.topBorder {
-    overflow: hidden;
-    padding-top: 1.3%;
-    padding-left: 1.3%;
-    padding-right: 1.3%;
-    /* background-color: rgb(243, 243, 243); */
-    /* border: 1px solid #e7e7e7; */
-}
-
 .topBorder img {
     float: left;
     padding: 0px 50px 0px 120px;
 }
 
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -67,8 +63,11 @@ img.avatar {
     padding: 16px;
 }
 
-.extra-content a {
+.extra-content {
     float: right;
+}
+
+.extra-content a {
     text-decoration: none;
     color: #339eff;
-}
+} */

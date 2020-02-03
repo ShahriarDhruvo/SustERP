@@ -1,132 +1,108 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="StyleSheets/main.css">
     <link rel="stylesheet" href="StyleSheets/signUp.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div>
-        <?php
-            $psw_error_msg = null;
-
-            if(isset($_POST['signUp'])){
-                $conn = mysqli_connect("localhost", "root", "");
-
-                if(!$conn)
-                    echo ("Error Connection: ".mysqli_connect_error());
-                if(!mysqli_select_db($conn, "erp_users_accounts"))
-                    echo "Failed to load the database";
-
-                $username = $_POST['username'];
-                $department = $_POST['department'];
-                $occupation = $_POST['occupation'];
-                $designation = $_POST['designation'];
-                $sess = $_POST['session'];
-                $email = $_POST['email'];
-                $psw = $_POST['psw'];
-                $psw_repeat = $_POST['psw-repeat'];
-
-                if($psw != $psw_repeat)
-                    $psw_error_msg = "<br><font color='#FF0000'> Your password doesn't match! </font><br><br>";
-                else{
-                    $sql = "INSERT INTO users (UserName, Department, Occupation, Designation, Sess, Email, Psw)
-                            VALUES('$username', '$department', '$occupation', '$designation', '$sess', '$email', '$psw')";
-                    $result = mysqli_query($conn, $sql);
-
-                    if($result){
-                        echo '<script language="javascript">';
-                            echo 'alert("You have successfully created an account.")';
-                        echo '</script>';
-                    }
-                    else{
-                        echo '<script language="javascript">';
-                            echo 'alert("An error occured while saving the data!\nTry again after sometime.")';
-                        echo '</script>';
-                    }
-                    header("refresh: 0.5; url = login.php");
-                }
-            }
+        <?php 
+            include 'header.php';
+            require_once 'controllers/authController.php'; 
         ?>
     </div>
 
-    <div class="topBorder">  
+    <!-- <div class="topBorder">  
         <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
+    </div> -->
+    <div class="container">
+        <form action="signUp.php" method="post">
+            <h2>Sign Up</h2>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 card card-body bg-light">
+                    <label for="uname" class="mt-2"><b>Name</b></label>
+                    <input type="text" value="<?php echo $username; ?>" placeholder="Enter full name" name="username" class="form-control" required>
+
+                    <div class="form-inline mt-4">
+                        <label for="department" class="mr-2"><b>Department</b></label>
+                        <select class="form-control mr-3" name="department">
+                            <option value="SWE" selected="selected">SWE</option>
+                            <option value="CSE">CSE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="MEE">MEE</option>
+                            <option value="CEE">CEE</option>
+                            <option value="CEP">CEP</option>
+                            <option value="IPE">IPE</option>
+                            <option value="PME">PME</option>
+                        </select>
+
+                        <label for="occupation" class="mr-2"><b>Occupation</b></label>
+                        <select class="form-control mr-3" name="occupation">
+                            <option value="admin">Admin</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="student" selected="selected">Student</option>
+                            <option value="librarian">Librarian</option>
+                        </select>
+                    
+                        <label for="designation" class="mr-2"><b>Designation</b></label>
+                        <select class="form-control mr-3" name="designation">
+                            <option value="none" selected="selected">None</option>
+                            <option value="professor">Professor</option>
+                            <option value="assistant professor">Assistant Professor</option>
+                            <option value="lecturer">Lecturer</option>
+                        </select>
+
+                        <label for="session" class="mr-2"><b>Batch</b></label>
+                        <input type="number" min="1986" max="3000" placeholder="Enter Batch" value="<?php echo $sess; ?>" name="session" class="form-control" style="width: 15%;">
+                    </div>
+                    
+                    <br>
+
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" value="<?php echo $email; ?>" placeholder="Enter Email" name="email" class="form-control" required>
+
+                    <?php echo $email_error; ?>
+
+                    <div class="form-group mt-1">
+                        <label for="psw" class="mt-2"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" class="form-control mb-1" required>
+                    
+                        <label for="psw-repeat" class="mt-2"><b>Repeat Password</b></label>
+                        <input type="password" placeholder="Repeat Password" name="psw-repeat" class="form-control mb-1" required>  
+                    </div>
+
+                    <?php echo $psw_error_msg; ?>
+
+                    <div class="form-check mb-2">
+                        <input type="checkbox" checked="checked" name="remember" class="form-check-input">
+                        <label class="form-check-label">Remember me</label>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <input type="checkbox" name="terms_policy" class="form-check-input" required> 
+                        <label class="form-check-label">I agree to the <a href="#">Terms & Policy</a></label>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-right">
+                            <p>Already have an account? <a href="login.php">Login</a></p>
+                        </div>
+                        <button type="submit" name="signup-btn" class="btn btn-primary" style="width: 12%;">Sign Up</button>
+                        <a href="login.php"><button type="button" class="btn btn-danger" style="width: 12%;">Cancel</button></a>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </form>
     </div>
 
-    <form action="signUp.php" method="post">
-        <div class="container">
-            <h1>Sign Up</h1>
-                <!-- <p>Please fill in this form to create an account.</p> -->
-            <hr>
-            
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-
-            <!-- <label for="fname"><b>First Name</b></label>
-            <input type="text" placeholder="Enter First Name" required>
-
-            <label for="lname"><b>Last Name</b></label>
-            <input type="text" placeholder="Enter Last Name" required> -->
-
-            <div class="selectContent">
-                <label for="department" class="dname"><b>Department</b></label>
-                <select class="sdname" name="department">
-                    <option value="SWE" selected="selected">SWE</option>
-                    <option value="CSE">CSE</option>
-                    <option value="EEE">EEE</option>
-                    <option value="MEE">MEE</option>
-                    <option value="CEE">CEE</option>
-                    <option value="CEP">CEP</option>
-                    <option value="IPE">IPE</option>
-                    <option value="PME">PME</option>
-                </select>
-
-                <label for="occupation" class="occupation"><b>Occupation</b></label>
-                <select class="soccupation" name="occupation">
-                    <option value="admin">Admin</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student" selected="selected">Student</option>
-                    <option value="librarian">Librarian</option>
-                </select>
-            
-                <label for="designation" class="designation"><b>Designation</b></label>
-                <select class="sdesignation" name="designation">
-                    <option value="none" selected="selected">None</option>
-                    <option value="professor">Professor</option>
-                    <option value="assistant professor">Assistant Professor</option>
-                    <option value="lecturer">Lecturer</option>
-                </select>
-            </div>
-            
-            <br>
-
-            <label for="session"><b>Batch</b></label>
-            <input type="number" placeholder="Enter Session" name="session">
-            
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" required>
-        
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-        
-            <label for="psw-repeat"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>  
-
-            <?php echo $psw_error_msg; ?>
-
-            <label>
-                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-            </label>
-            
-            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-            <div class="clearfix">
-                <button type="submit" name="signUp" class="signupbtn">Sign Up</button>
-                <a href="login.php"><button type="button" class="cancelbtn">Cancel</button></a>
-            </div>
-        </div>
-    </form>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

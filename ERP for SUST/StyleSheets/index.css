@@ -34,7 +34,7 @@
 }
 
 .flip-card-back {
-    background-color: #2e90e0;
+    background-color: #1c649e;
     color: white;
     transform: rotateY(180deg);
     padding-right: 45px;
@@ -50,15 +50,31 @@
     color: white;
 }
 
+.flip-card-back ul li a:hover {
+    font-size: 19px;
+    /* color: #2e90e0; */
+    color: #FFFDD0;
+}
+
+.flip-card-back ul .card-back-element {
+    margin-top: 32%;
+}
+
+.flip-card-back ul .card-back-element li {
+    padding-bottom: 8%;
+}
+.flip-card-back ul .non-auth {
+    margin-top: 50%;
+}
+
 /* Here is another field */
 
 #container01 {
     margin-top: 10%;
-    padding-left: 2.55%;
+    padding-left: 2.52%;
 }
 
 .showEvent {
     text-align: center;
-    margin-top: 14%;
-    margin-bottom: 2%;
+    margin-top: 5%;
 }

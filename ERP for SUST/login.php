@@ -1,80 +1,68 @@
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>LogIn Window</title>
-
+        <title>Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="StyleSheets/main.css">
         <link rel="stylesheet" href="StyleSheets/logIn.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <?php  
-            session_start();
-
-            $conn = mysqli_connect("localhost", "root", "", "erp_users_accounts");
-            $msg = null;
-
-            if(!$conn)
-                echo ("Error Connection: ".mysqli_connect_error());
-
-            if(isset($_POST['submit'])){
-                $name = $_POST['uname'];
-                $pass = $_POST['psw'];
-
-                $sql = "select * from users where UserName='$name' and Psw='$pass'";
-                $result = mysqli_query($conn, $sql);
-                $count = mysqli_num_rows($result);
-
-                if($count){
-                    $rows = mysqli_fetch_assoc($result);
-                    $_SESSION['login'] = true;
-                    $_SESSION['department'] = $rows['Department'];
-                    $_SESSION['batch'] = $rows['Sess'];
-                    $_SESSION['name'] = $rows['UserName'];
-                    $_SESSION['occupation'] = $rows['Occupation'];
-
-                    header('Location: index.php');
-                }
-                else
-                    $msg = '<br><font color="#FF0000"> Sorry buddy, Invalid Username Or Password </font><br><br>';
-            }
+        <?php 
+            include 'header.php';
+            require_once 'controllers/authController.php';
         ?>
 
-        <div class="topBorder">  
-            <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
-        </div>
-
-        <div class="main-container">
+        <div class="container">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                <div class="imgcontainer">
+                <div class="text-center">
+                    <strong><?php echo $verification_error_msg; ?></strong>
+                </div>
+                
+                <div class="text-center">
                     <img src="Img/Avatars/LogIn_avatar.png" alt="Avatar" class="avatar">
                 </div>
                     
-                <div class="container">
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-body bg-light">
+                                <div class="form-group">
+                                    <label for="email" class="mt-2"><b>Email</b></label>
+                                    <input type="email" value="<?php echo $email; ?>" placeholder="Enter email" name="email" class="form-control" required>
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-                    
-                    <?php echo $msg ?>
+                                    <?php echo $email_error; ?>
 
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
+                                    <label for="psw" class="mt-2"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="psw" class="form-control" required>
+                                    
+                                    <?php echo $psw_error_msg; ?>
+                                </div>
 
-                    <br>
+                                <div class="form-check">    
+                                    <input type="checkbox" checked="checked" name="remember" class="form-check-input"> 
+                                    <label for="remember" class="form-check-label">Remember me</label>
+                                </div>
 
-                    <div class="clearfix">
-                        <button type="submit" name="submit" class="loginbtn">Login</button>
-                        <a href="index.php"><button type="button" class="cancelbtn">Cancel</button></a>
+                                <div class="text-right">
+                                    <span class=""><a href="forgot_password.php">Forgot password?</a></span>
+                                    <br>
+                                    <span class="">Not yet a member? <a href="signUp.php">Sign Up</a></span>
+                                </div>
+
+                                <button type="submit" name="login-btn" class="btn btn-primary" style="width: 12%;">Login</button>
+                                <a href="index.php"><button type="button" class="btn btn-danger" style="width: 12%;">Cancel</button></a>
+                            </div>
+                        </div>
                     </div>
-
-                    <span class="extra-content"><a href="#">Forgot password?</a></span>
-                    <br><br>
-                    <span class="extra-content"><a href="signUp.php">Create an account</a></span>
+                    <div class="col-md-1"></div>
                 </div>
             </form>
-        </div>  
+        </div> 
+        
+        <?php include 'footer.php'; ?>
     </body>
 </html>

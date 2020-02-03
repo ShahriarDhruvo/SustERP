@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-    <title>ERP for SUST</title>
+    <title>SustERP</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="StyleSheets/index.css">
@@ -11,13 +11,36 @@
 </head>
 <body>
     <!-- header -->
-    <?php 
-        include 'header.php';
-    ?>
+    <?php include 'header.php'; ?>
     <!-- header -->
 
     <div class="container" id="container01">
-        <!-- <h2>Enterprise Resource Planning for Shahjalal University of Science and Technology</h2> --> 
+        <!-- <script>
+            // alert("Safari doesn't support certain things that are used in this website, so we recommend to use any chromium based browser, firefox or opera.");
+            alert("If you are using safari then use any chromium based browser, firefox or opera, because safari doesn't support certain things that we care about.");
+        </script> -->
+
+        <?php
+            require_once 'controllers/authController.php';
+
+            // Verify user using token
+            if(isset($_GET['token'])){
+                $token = $_GET['token'];
+                verifyUser($token);
+            }
+
+            // Grabbing token for reset-password
+            if(isset($_GET['password-token'])){
+                $passwordToken = $_GET['password-token'];
+                resetPassword($passwordToken);
+            }
+
+            if(!isset($_SESSION['login'])){
+                header("location: login.php");
+                exit();
+            }
+        ?>
+         
         <div class="row">   
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="flip-card">
@@ -27,23 +50,25 @@
                             <h2><br>Teacher</h2>
                         </div>
             
-                        <div class="flip-card-back">
+                        <div class="flip-card-back img-thumbnail">
                             <ul>
                                 <?php 
                                     if(($occupation_s == "teacher" || $occupation_s == "admin") && $login_s){
-                                        echo '<br><br>
-                                        <li><a target="_blank" href="addAssignments.php">Add Assignment</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="addAttendance.php">Add Attendance</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="addResults.php">Add Result</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="addEvents.php">Add Event</a></li>';
+                                        echo '
+                                        <div class="card-back-element">
+                                            <li><a href="addAssignments.php">Add Assignment</a></li>
+                                            
+                                            <li><a href="addAttendance.php">Add Attendance</a></li>
+                                            
+                                            <li><a href="addResults.php">Add Result</a></li>
+                        
+                                            <li><a href="addEvents.php">Add Event</a></li>
+                                        </div>';
                                     } 
                                     else if(!$login_s)
-                                        echo "<h4><br><br><br><br><br><br>Log In into your account first.</h4>";
+                                        echo "<div class='non-auth'> <h4>Log In into your account first.</h4> </div>";
                                     else
-                                        echo "<h4><br><br><br><br><br><br>You can't access this as you are a $occupation_s</h4>";
+                                        echo "<div class='non-auth'> <h4>You can't access this as you are a $occupation_s</h4> </div>";
                                 ?>
                             </ul>                   
                         </div>
@@ -59,24 +84,25 @@
                             <h2><br>Student</h2>
                         </div>
             
-                        <div class="flip-card-back">
+                        <div class="flip-card-back img-thumbnail">
                             <ul>
                                 <?php 
                                     if(($occupation_s == "student" || $occupation_s == "admin") && $login_s){
-                                        echo '<br><br>
-                                        <li><a target="_blank" href="viewAssignments.php">View Assignment</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="viewAttendance.php">View Attendance</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="">View Routine</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="viewResults.php">View Result</a></li>
-                                        ';
+                                        echo '
+                                        <div class="card-back-element">
+                                            <li><a href="viewAssignments.php">View Assignment</a></li>
+                                            
+                                            <li><a href="viewAttendance.php">View Attendance</a></li>
+                                            
+                                            <li><a href="viewRoutines.php">View Routine</a></li>
+                                            
+                                            <li><a href="viewResults.php">View Result</a></li>
+                                        </div>';
                                     } 
                                     else if(!$login_s)
-                                        echo "<h4><br><br><br><br><br><br>Log In into your account first.</h4>";
+                                        echo "<div class='non-auth'> <h4>Log In into your account first.</h4> </div>";
                                     else
-                                        echo "<h4><br><br><br><br><br><br>You can't access this as you are a $occupation_s</h4>";
+                                        echo "<div class='non-auth'> <h4>You can't access this as you are a $occupation_s</h4> </div>";
                                 ?>
                             </ul>
                         </div>
@@ -92,24 +118,25 @@
                             <h2><br>Librarian</h2>
                         </div>
             
-                        <div class="flip-card-back">
+                        <div class="flip-card-back img-thumbnail">
                             <ul>
                                 <?php 
                                     if(($occupation_s == "librarian" || $occupation_s == "admin") && $login_s){
-                                        echo '<br><br>
-                                        <li><a target="_blank" href="addBook.php">Add Books</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="issueBook.php">Issue Book</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="returnBook.php">Return Book</a></li>
-                                        <br>
-                                        <li><a target="_blank" href="displayBook.php">View Book</a></li>
-                                        ';
+                                        echo '
+                                        <div class="card-back-element">
+                                            <li><a href="returnBook.php">Return a book</a></li>
+
+                                            <li><a href="issueBook.php">Issue a book</a></li>
+
+                                            <li><a href="displayBook.php">View books</a></li>
+
+                                            <li><a href="addBook.php">Add Books</a></li>
+                                        </div>';
                                     } 
                                     else if(!$login_s)
-                                        echo "<h4><br><br><br><br><br><br>Log In into your account first.</h4>";
+                                        echo "<div class='non-auth'> <h4>Log In into your account first.</h4> </div>";
                                     else
-                                        echo "<h4><br><br><br><br><br><br>You can't access this as you are a $occupation_s</h4>";
+                                        echo "<div class='non-auth'> <h4>You can't access this as you are a $occupation_s</h4> </div>";
                                 ?>
                             </ul>
                         </div>
@@ -119,15 +146,22 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="button showEvent">
-            <button id='eventname' class="eventToggle1 btn btn-primary dropdown-toggle">Show Events </button>
-            <div class="dropup">
-                <button id='eventname' class="eventToggle2 btn btn-primary dropdown-toggle" style="display: none;">Hide Events </button>
-            </div>
+    <div class="container" style="margin-top: 8%;">
+        <h3 style="padding-right: 0.5%;">Events</h3>
+        <div id="div1">
+            <script>
+                $("#div1").load("indexEvents.php #first_three");
+            </script>
         </div>
 
         <div id="events" class="eventToggle" style="display: none;"></div>
+        
+        <div class="button showEvent" style="margin-bottom: 5%;">
+            <button id='eventname' class="eventToggle1 btn btn-primary dropdown-toggle">Show more </button>
+            <div class="dropup">
+                <button id='eventname' class="eventToggle2 btn btn-primary dropdown-toggle" style="display: none;">Show less </button>
+            </div>
+        </div>
     </div>
 
     <script
@@ -164,5 +198,7 @@
             });               
         });
     </script>
+    
+    <?php include 'footer.php'; ?>
 </body>
 </html>

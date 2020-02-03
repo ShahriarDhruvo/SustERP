@@ -1,0 +1,177 @@
+include https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+
+body {
+	
+}
+
+.container {
+	width: 400px;
+	height: 200px;
+	position: relative;
+	perspective: 1000;
+	-webkit-perspective: 1000;
+	left: calc(50% - 200px);
+    top: calc(50vh - 100px);
+}
+.card {
+	width: 100%;
+	height: 100%;
+    position: absolute;
+    
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+    transition: transform 1s ease;
+    
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.back,
+.front {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+.contentfront {
+	width: 100%;
+	height: 100%;
+	float: left;
+	transform: translatez(60px);
+	-webkit-transform: translatez(60px);
+
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+}
+.contentback {
+	width: 100%;
+	height: 100%;
+	float: left;
+	transform: translatez(-60px);
+	-webkit-transform: translatez(-60px);
+
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+}
+.back {
+	transform: rotateY(180deg);
+	background-color: #ecece7;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.front {
+	text-transform: uppercase;
+	background-color: #ecece7;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.date {
+	height: 100%;
+	width: 130px;
+	float: left;
+	background-color: #007bff;
+	border-radius: 0 6px 6px 0;
+	text-align: right;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+}
+.datecont {
+	height: 100%;
+	transform: translatez(60px) scale(0.9);
+	-webkit-transform: translatez(60px) scale(0.9);
+}
+#date {
+	font-size: 50px;
+	color: #ffffff;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	float: right;
+}
+#day {
+	float: right;
+	font-size: 14px;
+	color: #ffffff;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+}
+#month {
+	float: right;
+	font-size: 10px;
+	color: #ffffff;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 200;
+}
+.date i {
+	color: #ffffff;
+	position: absolute;
+	bottom: 10px;
+	right: 0;
+}
+.date i:hover {
+	color: #ffffff;
+	transition: 0.3s ease;
+}
+.month {
+	height: 100%;
+	width: 270px;
+	float: left;
+	padding: 20px 30px;
+	box-sizing: border-box;
+}
+.month table {
+	width: 100%;
+}
+.orangeTr {
+	color: #e76642;
+}
+.whiteTr {
+	color: #ffffff;
+}
+.whiteTr th:hover {
+	color: #e76642;
+	transition: 0.3s ease;
+}
+.month tr {
+	height: 24px;
+}
+.month th {
+	width: 14%;
+	font-size: 10px;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+}
+
+.flipped {
+	transform: rotateY(-180deg);
+	/*height:400px;
+    width:200px;
+    left:calc(50% - 100px);
+    top:calc(50vh - 200px);*/
+}
+.backcontainer {
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+	width: calc(100% - 60px);
+	height: calc(100% - 40px);
+	float: left;
+	margin-left: 30px;
+	margin-top: 20px;
+	border-left: solid red 5px;
+	background-color: red;
+	transform: translatez(-60px) scale();
+}

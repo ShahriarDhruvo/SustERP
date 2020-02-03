@@ -11,9 +11,7 @@
 	</head>
 	<body>
 		<!-- header -->
-		<?php 
-			include 'header.php'; 
-		?>
+		<?php include 'header.php'; ?>
 		<!-- header -->
 		
 		<div class="container">
@@ -26,29 +24,31 @@
 				date_default_timezone_set('Asia/Dhaka');
 
 				$your_assignment = true;
+				$this_file_name = "addResults.php";
 
 				// Create database connection
-				if(!($db = mysqli_connect("localhost", "root", "", "erp_datas")))
-					echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
+				require 'config/db.php';
+				// if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
+				// 	echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
 
 				// Initialize message variable
 				$msg = "";
 
 				// If upload button is clicked ...
 				if (isset($_POST['upload'])){
-					if($login_s && $db){
+					if($login_s && $conn){
 						$department = htmlspecialchars($_POST['department']);
 						$batch = htmlspecialchars($_POST['batch']);
 						$year_semes = htmlspecialchars($_POST['year_semes']);
 						$course_name = htmlspecialchars($_POST['course_name']);
 						
 						if($department != $department_s && $occupation_s != "admin")
-							echo "<h2>You cannot upload files other than your department's.</h2>";
+							echo "<h2>You cannot upload files other than your department's.</h2><br><br><br>";
 						else{
 							// Get file name
 							$name = htmlspecialchars($_FILES['files']['name']);
 
-							$data = mysqli_query($db, "SELECT MAX(id) FROM results");
+							$data = mysqli_query($conn, "SELECT MAX(id) FROM results");
 							$inc = mysqli_fetch_row($data);
 							$id = $inc[0] + 1;
 
@@ -60,10 +60,11 @@
 								// file directory
 								$target = "Data/results/".basename($file);
 
-								$sql = "INSERT INTO results (date, uploaders_name, department_name, course_name, batch_year, semester, files) VALUES ('$time', '$name_s', '$department', '$course_name', '$batch', '$year_semes', '$file')";
+								$sql = "INSERT INTO results (date, uploaders_name, department_name, course_name, batch_year, semester, files) 
+								VALUES ('$time', '$name_s', '$department', '$course_name', '$batch', '$year_semes', '$file')";
 								
 								// execute query
-								if(!mysqli_query($db, $sql))
+								if(!mysqli_query($conn, $sql))
 									echo "There is an error while quering.";
 
 								if(move_uploaded_file($_FILES['files']['tmp_name'], $target))
@@ -84,21 +85,47 @@
 							} 
 						}
 					}
-					else echo "<h2>Log in into your account first.</h2>";
+					else echo "<h2>Log in into your account first.</h2><br><br><br>";
 				}
-				$result = mysqli_query($db, "SELECT * FROM results");
+				$ssql = "SELECT * FROM results";
+
+				$search_term = null;
+				$filter = null;
+
+				if(isset($_POST['search'])){
+					$search_term = htmlspecialchars($_POST['search_box']);
+					$filter = $_POST['filter'];
+
+					if($filter == "1")
+						$ssql .= " WHERE CONCAT(date, uploaders_name, department_name, course_name, batch_year, semester, files) LIKE '%".$search_term."%' ORDER BY semester";
+					else if($filter == "2")
+						$ssql .= " WHERE department_name LIKE '%".$search_term."%' ORDER BY semester";
+					else if($filter == "3")
+						$ssql .= " WHERE batch_year LIKE '%".$search_term."%' ORDER BY semester";
+					else if($filter == "4")
+						$ssql .= " WHERE semester LIKE '%".$search_term."%' ORDER BY semester";
+					else if($filter == "5")
+						$ssql .= " WHERE course_name LIKE '%".$search_term."%' ORDER BY semester";
+				}
+				else $ssql .= " ORDER BY semester";
+
+				if(!$result = mysqli_query($conn, $ssql)) echo mysqli_error($conn);
+
 				$authorization = true;
 
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
+
+				include 'search.php';
 			?>
 
 			<h3><br>Upload a result<br><br></h3>
 
 			<form method="POST" action="addResults.php" enctype="multipart/form-data" class="card card-body bg-light">
 				<?php
-					if(!$login_s && $db) echo "<h2>Log in into your account first.</h2>";
-					else if(!$authorization && $db) echo "<h2>You are not authorize to see the contents of this page.</h2>";
-					else if($db){
+					if(!$login_s && $conn) echo "<h2>Log in into your account first.</h2>";
+					else if(!$authorization && $conn) echo "<h2>You are not authorize to see the contents of this page.</h2><br><br><br>";
+					else if($conn){
+						$year = date("Y")-1;
 						echo '
 						<input type="hidden" name="size" value="10000000">
 						<div>   
@@ -117,7 +144,7 @@
 							</div>
 							<div class="form-group">
 								<label><b>Batch</b></label>
-								<input type="number" placeholder="Batch Year" name="batch" class="form-control">
+								<input type="number" min="1986" value="'.$year.'" placeholder="Batch Year" name="batch" class="form-control">
 							</div>
 							<div class="form-group">
 								<label><b>Year/Semester</b></label>
@@ -144,9 +171,9 @@
 			<h3><br><br>Results<br><br></h3>
 
 			<?php
-				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $db)
-					echo "<h2>Sorry buddy, you haven't uploaded any result yet.....</h2>";
-				else if($login_s && $authorization && $db){
+				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $conn)
+					echo "<h2>Sorry buddy, you haven't uploaded any result yet.....</h2><br><br><br>";
+				else if($login_s && $authorization && $conn){
 					while ($row = mysqli_fetch_array($result)){
 						if(($occupation_s == "teacher" && $department_s == $row['department_name']) || ($occupation_s == "admin")){
 							$your_assignment = false;
@@ -178,7 +205,7 @@
 							echo "<br>";
 						}
 					}
-					if($your_assignment) echo "<h2>Sorry buddy, you haven't uploaded any result yet.....</h2>";
+					if($your_assignment) echo "<h2>Sorry buddy, you haven't uploaded any result yet.....</h2><br><br><br>";
 				}
 
 				if(isset($_POST['delete'])){
@@ -188,7 +215,7 @@
 
 					$sql = "DELETE FROM results WHERE id=$file_id";
 			
-					if (mysqli_query($db, $sql) && unlink($path)){
+					if (mysqli_query($conn, $sql) && unlink($path)){
 						echo '<script language="javascript">';
                         	echo 'alert("'.$file_name.' deleted successfully.")';
                         echo '</script>';
@@ -211,5 +238,7 @@
                 $(this).next('.custom-file-label').html(fileName);
             })
         </script>
+
+		<?php include 'footer.php'; ?>
 	</body>
 </html>

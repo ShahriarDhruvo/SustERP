@@ -16,14 +16,20 @@
     }
 ?>
 
-<nav class="navbar navbar-expand-sm bg-light" style="margin-bottom: 5%;">  
+<nav class="navbar navbar-expand-sm bg-light" style="margin-bottom: 5%; padding-top: 1.10%; padding-bottom: 1.10%;">  
     <a class="navbar-brand" style="margin-left: 3%;" href="index.php">
-        <img class="img-responsive" src="Img/Logos/logo2.png" alt="logo" style="width:120px">
+        <img class="img-responsive" src="Img/Logos/logo2.png" alt="logo" style="width: 120px;">
     </a>
-    <ul class="navbar-nav" style="margin-left: 2%;">
+    <ul class="navbar-nav" style="margin-left: 1%;">
         <li class="nav-item">
-            <a class="nav-link" href="https://www.sust.edu/">My Campus</a>
+            <a class="nav-link" href="index.php">Home</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://www.sust.edu/">My Campus</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="index.php">Home</a>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="about.php">About</a>
         </li>
@@ -40,6 +46,7 @@
                         .htmlspecialchars($name_s)."
                         </span>
                         <div class='dropdown-menu'>
+                            <a class='dropdown-item' href='profile.php'>My Profile</a>
                             <a class='dropdown-item ditem' href='logout.php'>Log Out</a>
                         </div> 
                         </span>";

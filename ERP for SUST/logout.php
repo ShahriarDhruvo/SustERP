@@ -1,6 +1,15 @@
 <?php
-    session_start();
-    $_SESSION['login'] = false;
+    require_once 'controllers/authController.php';
+
     session_destroy();
-    header('Location: index.php');
+    unset($_SESSION['login']);
+    unset($_SESSION['department']);
+    unset($_SESSION['batch']);
+    unset($_SESSION['name']);
+    unset($_SESSION['email']);
+    unset($_SESSION['occupation']);
+    unset($_SESSION['verified']);
+
+    header('Location: login.php');
+    exit();
 ?>

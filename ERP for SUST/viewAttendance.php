@@ -11,9 +11,7 @@
 	</head>
 	<body>
 		<!-- header -->
-		<?php 
-			include 'header.php'; 
-		?>
+		<?php include 'header.php'; ?>
 		<!-- header -->
 		
 		<div class="container">
@@ -21,21 +19,48 @@
             <h3>Attendance<br><br></h3>
             
             <?php
-                $your_assignment = true;
+				$your_assignment = true;
+				$this_file_name = "viewAttendance.php";
             
-                // Create database connection
-                if(!($db = mysqli_connect("localhost", "root", "", "erp_datas")))
-                    echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
-                $result = mysqli_query($db, "SELECT * FROM attendance");
-                $authorization = true;
+				// Create database connection
+				require 'config/db.php';
+                // if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
+                //     echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
+				
+				$ssql = "SELECT * FROM attendance";
+
+                $search_term = null;
+				$filter = null;
+
+				if(isset($_POST['search'])){
+					$search_term = htmlspecialchars($_POST['search_box']);
+					$filter = $_POST['filter'];
+
+					if($filter == "1")
+						$ssql .= " WHERE CONCAT(date, uploaders_name, department_name, batch_year, semester, course_name, files, comments) LIKE '%".$search_term."%'";
+					else if($filter == "2")
+						$ssql .= " WHERE department_name LIKE '%".$search_term."%'";
+					else if($filter == "3")
+						$ssql .= " WHERE batch_year LIKE '%".$search_term."%'";
+					else if($filter == "4")
+						$ssql .= " WHERE semester LIKE '%".$search_term."%'";
+					else if($filter == "5")
+						$ssql .= " WHERE course_name LIKE '%".$search_term."%'";
+				}
+
+                if(!$result = mysqli_query($conn, $ssql)) echo mysqli_error($conn);
+				
+				$authorization = true;
             
                 if(!($occupation_s == "teacher" || $occupation_s == "student" || $occupation_s == "admin")) $authorization = false;
-                
-                if(!$login_s && $db) echo "<h2>Log in into your account first.</h2>";
-                else if(!$authorization && $db) echo "<h2>You are not authorize to see the contents of this page.</h2>";
-                else if(!(mysqli_num_rows($result)) && $login_s && $authorization  && $db)
+				
+				include 'search.php';
+
+                if(!$login_s && $conn) echo "<h2>Log in into your account first.</h2>";
+                else if(!$authorization && $conn) echo "<h2>You are not authorize to see the contents of this page.</h2>";
+                else if(!(mysqli_num_rows($result)) && $login_s && $authorization  && $conn)
                     echo "<h2>Sorry buddy, your attendance hasn't been uploaded yet.....</h2>";
-                else if($db){
+                else if($conn){
                     while ($row = mysqli_fetch_array($result)){
 						if(($occupation_s == "teacher" && $department_s == $row['department_name']) || ($occupation_s == "admin") || ($occupation_s == "student" && $department_s == $row['department_name'] && $batch == $row['batch_year'])){
 							$your_assignment = false;
@@ -66,5 +91,7 @@
                 }
 			?>
 		</div>
+
+		<?php include 'footer.php'; ?>
 	</body>
 </html>
