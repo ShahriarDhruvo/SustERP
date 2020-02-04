@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php' ?>
+<!-- header -->
+
 <html lang="en">
 <head>
     <title>Contact Us</title>
@@ -10,10 +14,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- header -->
-    <?php include 'header.php' ?>
-    <!-- header -->
-    
     <!-- <div class="topBorder">  
         <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
     </div> -->

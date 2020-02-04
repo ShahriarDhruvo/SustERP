@@ -1,3 +1,8 @@
+<?php 
+    include 'header.php';
+    require_once 'controllers/authController.php'; 
+?>
+
 <html lang="en">
 <head>
     <title>Sign Up</title>
@@ -10,13 +15,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <?php 
-            include 'header.php';
-            require_once 'controllers/authController.php'; 
-        ?>
-    </div>
-
     <!-- <div class="topBorder">  
         <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
     </div> -->

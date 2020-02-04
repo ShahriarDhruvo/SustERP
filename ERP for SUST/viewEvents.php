@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 	<head>
 		<title>View Events</title>
@@ -10,23 +10,25 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div>
+		<div> -->
             <?php
-                session_start();
-                $login_s = false;
-                $name = null;
-                $occupation = null;
-                $department = null;
-                $your_assignment = true;
-                $batch = null;
+                // if(session_status() == PHP_SESSION_NONE){
+                //     session_start();
+                // }
+                // $login_s = false;
+                // $name = null;
+                // $occupation = null;
+                // $department = null;
+                // $your_assignment = true;
+                // $batch = null;
 
-                if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
-                    $name = $_SESSION['name'];
-                    $login_s = $_SESSION['login']; 
-                    $occupation = $_SESSION['occupation'];
-                    $department = $_SESSION['department'];
-                    $batch = $_SESSION['batch'];
-                }
+                // if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
+                //     $name = $_SESSION['name'];
+                //     $login_s = $_SESSION['login']; 
+                //     $occupation = $_SESSION['occupation'];
+                //     $department = $_SESSION['department'];
+                //     $batch = $_SESSION['batch'];
+                // }
             
                 // Create database connection
                 require 'config/db.php';
@@ -69,6 +71,6 @@
                     if($your_assignment) echo "<h2>Sorry buddy, no event has been uploaded yet.....</h2><br><br><br>";
                 }
 			?>
-		</div>
+		<!-- </div>
 	</body>
-</html>
+</html> -->

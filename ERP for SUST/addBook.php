@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <html lang="en">
 
 <head>
@@ -12,10 +16,6 @@
 </head>
 
 <body>
-    <!-- header -->
-    <?php include 'header.php'; ?>
-    <!-- header -->
-
     <div class="container">
         <?php
           ini_set('upload_max_filesize', '10M');

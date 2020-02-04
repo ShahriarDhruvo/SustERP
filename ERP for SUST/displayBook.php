@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <html lang="en">
 
 <head>
@@ -12,10 +16,6 @@
 </head>
 
 <body>
-    <!-- header -->
-    <?php include 'header.php'; ?>
-    <!-- header -->
-
     <div class="container">
         <form name="form1" action="" method="post" class="mb-5">
             <div class="card card-body bg-light">

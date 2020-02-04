@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <html lang="en">
 
 <head>
@@ -10,10 +14,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- header -->
-    <?php include 'header.php'; ?>
-    <!-- header -->
-
     <div class="container" id="container01">
         <!-- <script>
             // alert("Safari doesn't support certain things that are used in this website, so we recommend to use any chromium based browser, firefox or opera.");
@@ -35,10 +35,10 @@
                 resetPassword($passwordToken);
             }
 
-            if(!isset($_SESSION['login'])){
-                header("location: login.php");
-                exit();
-            }
+            // if(!isset($_SESSION['login'])){
+            //     header("location: login.php");
+            //     exit();
+            // }
         ?>
          
         <div class="row">   

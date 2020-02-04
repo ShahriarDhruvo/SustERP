@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <html lang="en">
 
 <head>
@@ -12,10 +16,6 @@
 </head>
 
 <body>
-    <!-- header -->
-    <?php include 'header.php'; ?>
-    <!-- header -->
-
     <div class="container">
         <?php 
           $date = date("Y-m-d");

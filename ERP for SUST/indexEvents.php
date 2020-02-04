@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php' ?>
+<!-- header -->
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,7 +16,6 @@
 	<body>
 		<div>
             <?php
-                session_start();
                 $login_s = false;
                 $name = null;
                 $occupation = null;

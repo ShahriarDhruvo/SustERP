@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,10 +14,6 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<!-- header -->
-		<?php include 'header.php'; ?>
-		<!-- header -->
-		
 		<div class="container">
         
             <h3>Attendance<br><br></h3>

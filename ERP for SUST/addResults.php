@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,12 +14,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<!-- header -->
-		<?php include 'header.php'; ?>
-		<!-- header -->
-		
 		<div class="container">
-
 			<?php
 				ini_set('upload_max_filesize', '10M');
 				ini_set('post_max_size', '10M');

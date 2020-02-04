@@ -1,3 +1,8 @@
+<?php 
+    include 'header.php';
+    require_once 'controllers/authController.php';
+?>
+
 <html lang="en">
     <head>
         <title>Login</title>
@@ -10,11 +15,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <?php 
-            include 'header.php';
-            require_once 'controllers/authController.php';
-        ?>
-
         <div class="container">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                 <div class="text-center">

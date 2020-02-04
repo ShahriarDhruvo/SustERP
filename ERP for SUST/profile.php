@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php'; ?>
+<!-- header -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +14,6 @@
     <title>My Profile</title>
 </head>
 <body>
-    <!-- header -->
-    <?php include 'header.php'; ?>
-    <!-- header -->
-
     <div class="container" style="margin-top: 0%;">
         <?php
             include 'controllers/authController.php';

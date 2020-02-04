@@ -1,3 +1,7 @@
+<?php
+    include 'controllers/authController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +15,6 @@
 </head>
 <body>
     <div class="container" style="margin-top: 15%;">
-        <?php
-            include 'controllers/authController.php';
-        ?>
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="card">

@@ -1,3 +1,7 @@
+<!-- header -->
+<?php include 'header.php' ?>
+<!-- header -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
