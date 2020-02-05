@@ -11,6 +11,10 @@
     unset($_SESSION['occupation']);
     unset($_SESSION['verified']);
 
-    header('Location: login.php');
+    $URL="login.php";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+    // header('Location: login.php');
     exit();
 ?>

@@ -91,7 +91,11 @@
 							echo 'alert("'.$msg.'")';
 						echo '</script>';
 						
-						header("refresh: 0.5; url = addEvents.php");
+						$URL="addEvents.php";
+						echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+						echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+						// header("refresh: 0.5; url = addEvents.php");
 					}
 					else echo "<h2>Log in into your account first.</h2>";
 				}
@@ -239,8 +243,13 @@
                         	echo 'alert("Error deleting '.$file_name.'")';
                         echo '</script>';
 					}
+
+					$URL="addEvents.php";
+					echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+					echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
 					// header("refresh: 0.5; url = addEvents.php");
-					echo "<script>location.href='addEvents.php'</script>";
+					// echo "<script>location.href='addEvents.php'</script>";
 				}
 			?>
 		</div>

@@ -87,7 +87,11 @@
 								echo 'alert("'.$msg.'")';
 								echo '</script>';
 
-								header("refresh: 0.5; url = addAssignments.php");
+								$URL="addAssignments.php";
+								echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+								echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+								// header("refresh: 0.5; url = addAssignments.php");
 							}
 							else{
 								echo '<script language="javascript">';
@@ -264,8 +268,13 @@
                         	echo 'alert("Error deleting '.$file_name.'")';
                         echo '</script>';
 					}
+	
+					$URL="addAssignments.php";
+					echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+					echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';						
+
 					// header("refresh: 0.5; url = addAssignments.php");
-					echo "<script>location.href='addAssignments.php'</script>";
+					// echo "<script>location.href='addAssignments.php'</script>";
 				}
 			?>
 		</div>

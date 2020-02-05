@@ -74,7 +74,11 @@
                 echo 'alert("'.$msg.'")';
                 echo '</script>';
 
-                header("refresh: 0.5; url = returnBook.php");
+                $URL="returnBook.php";
+                echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+                echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+                // header("refresh: 0.5; url = returnBook.php");
             }
         ?>
 

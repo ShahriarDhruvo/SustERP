@@ -1,13 +1,6 @@
 <?php
 
-// require 'config/db.php';
 require_once 'emailController.php';
-
-// if(!mysqli_select_db($conn, "erp_datas"))
-//     echo "Failed to load the database";
-
-// if(!mysqli_select_db($conn, "erp_users_accounts"))
-//     echo "Failed to load the database";
 
 $verification_error_msg = null;
 $psw_error_msg = null;
@@ -62,7 +55,12 @@ if(isset($_POST['signup-btn'])){
                 echo '<script language="javascript">';
                     echo 'alert("You have successfully created an account.")';
                 echo '</script>';
-                header("refresh: 0.5; url = activation.php");
+
+                $URL="activation.php";
+                echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+                echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+                // header("refresh: 0.5; url = activation.php");
                 exit();
             }
             else{
@@ -99,7 +97,11 @@ if(isset($_POST['login-btn'])){
         $_SESSION['designation'] = $rows['Designation'];
         $_SESSION['verified'] = $verified;
 
-        header('Location: index.php');
+        $URL="index.php";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+        // header('Location: index.php');
         exit();
     }
     else if(!$verified && $email_error == null)
@@ -131,7 +133,11 @@ function verifyUser($token){
             $_SESSION['message'] = "Your email address was successfully verified!";
             $_SESSION['alert-class'] = "alert-success";
 
-            header('Location: index.php');
+            $URL="index.php";
+            echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+            echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+            // header('Location: index.php');
             exit();
         }
         else echo "User not found";
@@ -148,7 +154,12 @@ if(isset($_POST['forgot-password'])){
         $user = mysqli_fetch_assoc($result);
         $token = $user['token'];
         sendPasswordResetLink($email, $token);
-        header('location: password_message.php');
+
+        $URL="password_message.php";
+        echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+        echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+        // header('location: password_message.php');
         exit();
     } 
     else $email_error = "<font color='#FF0000'> This email address doesn't exist in the database</font>"; 
@@ -166,7 +177,11 @@ if(isset($_POST['reset-password'])){
         $sql = "UPDATE users SET Psw='$hpsw' WHERE Email='$email'";
         $result = mysqli_query($conn, $sql);
         if($result){
-            header("location: login.php");
+            $URL="login.php";
+            echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+            echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+            // header("location: login.php");
             exit();
         }
     }
@@ -179,6 +194,10 @@ function resetPassword($token){
     $user = mysqli_fetch_assoc($result);
     $_SESSION['email'] = $user['Email'];
 
-    header("location: reset_password.php");
+    $URL="reset_password.php";
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+    // header("location: reset_password.php");
     exit();
 }

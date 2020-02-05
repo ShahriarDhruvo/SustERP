@@ -36,7 +36,11 @@
             }
 
             // if(!isset($_SESSION['login'])){
-            //     header("location: login.php");
+            //     $URL="login.php";
+            //     echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+            //     echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
+
+            //     // header("location: login.php");
             //     exit();
             // }
         ?>

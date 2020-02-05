@@ -42,10 +42,10 @@
 
             $sql = "SELECT * FROM addbook";
             $search_item = null;
-            
+
             if(isset($_POST["submit1"])){
-                $sql .= " WHERE Book_Name LIKE '%".$_POST['t1']."%'";
-                $search_item = $_POST['t1'];
+                $sql .= " WHERE Book_Name LIKE '%".htmlspecialchars($_POST['t1'])."%'";
+                $search_item = htmlspecialchars($_POST['t1']);
             }
                 
             $result = mysqli_query($conn, $sql);
