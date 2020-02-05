@@ -15,7 +15,8 @@ $batch = null;
             
 if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
     $login_s = $_SESSION['login']; 
-    $name_s = ucfirst($_SESSION['name']);
+    $name_s = ucwords($_SESSION['name']);
+    $designation_s = ucfirst($_SESSION['designation']);
     $occupation_s = $_SESSION['occupation'];
     $department_s = $_SESSION['department'];
     $batch = $_SESSION['batch'];

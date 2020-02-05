@@ -23,7 +23,6 @@
                     <div class="card-body bg-light">
                         <form action="forgot_password.php" method="post">
                             <h3>Recover Your password</h3>
-
                             <p>
                                 Please enter your email address you used to sign up on this site
                                 and we will assist you in recovering your password.
@@ -34,7 +33,9 @@
                                 <input type="email" name="email" placeholder="Enter your email address" class="form-control form-control-lg" required>
                             </div>
 
-                            <?php echo $email_error; ?>
+                            <div class="mb-3">
+                                <?php echo $email_error; ?>
+                            </div>
 
                             <div class="form-group">
                                 <button type="submit" name="forgot-password" class="btn btn-primary btn-block btn-lg">Reset your password</button>

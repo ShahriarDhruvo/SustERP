@@ -26,7 +26,7 @@ function sendVerificationEmail($email, $token){
                 Thank you for signing up on our website. Please click on the link below
                 to verify your email.
             </p>
-            <a href="http://localhost/ERP-for-SUST/ERP%20for%20SUST/index.php?token='.$token.'">
+            <a target="_blank" href="http://localhost/ERP-for-SUST/ERP%20for%20SUST/index.php?token='.$token.'">
                 Verify your email address
             </a>
         </div>
@@ -60,7 +60,7 @@ function sendPasswordResetLink($email, $token){
 
                 Please click on the link below to reset your password.
             </p>
-            <a href="http://localhost/ERP-for-SUST/ERP%20for%20SUST/index.php?password-token='.$token.'">
+            <a target="_blank" href="http://localhost/ERP-for-SUST/ERP%20for%20SUST/index.php?password-token='.$token.'">
                 Reset your password
             </a>
         </div>

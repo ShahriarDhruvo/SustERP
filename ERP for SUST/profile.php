@@ -22,9 +22,9 @@
                 <img src="Img/Avatars/LogIn_avatar.png" alt="Profile picture" style="width: 42%; margin-bottom: 5%;">
 
                 <?php 
-                    echo "<h3 style='margin-bottom: -1px; color: #044d92;'><b>".ucfirst($_SESSION['name'])."</b></h3>"; 
+                    echo "<h3 style='margin-bottom: -1px; color: #044d92;'><b>".ucwords($_SESSION['name'])."</b></h3>"; 
                     if($_SESSION['designation'] != 'none')
-                        echo "<p>".ucfirst($_SESSION['designation'])."</p>";
+                        echo "<p class='mt-2' style='font-size:20px'>".ucfirst($_SESSION['designation'])."</p>";
                 ?>
 
                 <div class="card" style="margin-top: 10%;">

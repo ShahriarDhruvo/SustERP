@@ -31,20 +31,11 @@
         <h2>Books</h2>
 
         <?php
-            // Create database connection
-            // require 'config/db.php';
-            // $conn = mysqli_connect("localhost", "root", "");
-            
-            // if(!$conn)
-            //     echo ("Error Connection: ".mysqli_connect_error());
-            // if(!mysqli_select_db($conn, "erp_datas"))
-            //     echo "Failed to load the database";
-
             $sql = "SELECT * FROM addbook";
             $search_item = null;
 
             if(isset($_POST["submit1"])){
-                $sql .= " WHERE Book_Name LIKE '%".htmlspecialchars($_POST['t1'])."%'";
+                $sql .= " WHERE Book_Name LIKE '%".htmlspecialchars($_POST['t1'])."%' OR Author_Name LIKE '%".htmlspecialchars($_POST['t1'])."%'";
                 $search_item = htmlspecialchars($_POST['t1']);
             }
                 

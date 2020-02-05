@@ -33,7 +33,9 @@
                                 <input type="password" placeholder="Confirm Password" name="passwordConf" class="form-control form-control-lg" required>
                             </div>
 
-                            <?php echo $psw_error_msg; ?>
+                            <div class="mb-3">
+                                <?php echo $psw_error_msg; ?>
+                            </div>
 
                             <div class="form-group">
                                 <button type="submit" name="reset-password" class="btn btn-primary btn-block btn-lg">

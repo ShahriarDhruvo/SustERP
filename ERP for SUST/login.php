@@ -34,8 +34,10 @@
                                 <div class="form-group">
                                     <label for="email" class="mt-2"><b>Email</b></label>
                                     <input type="email" value="<?php echo $email; ?>" placeholder="Enter email" name="email" class="form-control" required>
-
-                                    <?php echo $email_error; ?>
+                                    
+                                    <div class="mt-2">
+                                        <?php echo $email_error; ?>
+                                    </div>
 
                                     <label for="psw" class="mt-2"><b>Password</b></label>
                                     <input type="password" placeholder="Enter Password" name="psw" class="form-control" required>
@@ -49,8 +51,9 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <span class=""><a href="forgot_password.php">Forgot password?</a></span>
-                                    <br>
+                                    <div class="mb-2">
+                                        <span class=""><a href="forgot_password.php">Forgot password?</a></span>
+                                    </div>
                                     <span class="">Not yet a member? <a href="signUp.php">Sign Up</a></span>
                                 </div>
 

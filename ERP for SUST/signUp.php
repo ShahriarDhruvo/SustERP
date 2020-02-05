@@ -64,7 +64,9 @@
                     <label for="email"><b>Email</b></label>
                     <input type="email" value="<?php echo $email; ?>" placeholder="Enter Email" name="email" class="form-control" required>
 
-                    <?php echo $email_error; ?>
+                    <div class="mt-2 mb-2">
+                        <?php echo $email_error; ?>
+                    </div>
 
                     <div class="form-group mt-1">
                         <label for="psw" class="mt-2"><b>Password</b></label>
@@ -74,7 +76,9 @@
                         <input type="password" placeholder="Repeat Password" name="psw-repeat" class="form-control mb-1" required>  
                     </div>
 
-                    <?php echo $psw_error_msg; ?>
+                    <div class="mb-3">
+                        <?php echo $psw_error_msg; ?>
+                    </div>
 
                     <div class="form-check mb-2">
                         <input type="checkbox" checked="checked" name="remember" class="form-check-input">

@@ -16,7 +16,7 @@
     <title>Activate your account</title>
 </head>
 <body>
-    <div class="container" style="margin-top: 15%;">
+    <div class="container" style="margin-top: 12%;">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="card">

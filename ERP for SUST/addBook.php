@@ -31,41 +31,27 @@
           echo "<font color='#FF0000'>"."Error Connection: ".mysqli_connect_error()."</font>";
 
           if(isset($_POST['submit'])){          
-            $Book_name=$_POST['bookName'];
-            $Author_name=$_POST['authorName'];
-            $Number_of_books=$_POST['booksNumber'];
-            
-            //$name = htmlspecialchars($_FILES['files']['name']);
+              $Book_name = htmlspecialchars($_POST['bookName']);
+              $Author_name = htmlspecialchars($_POST['authorName']);
+              $Number_of_books = htmlspecialchars($_POST['booksNumber']);
+              
+              //$name = htmlspecialchars($_FILES['files']['name']);
 
-            $sql="INSERT INTO addbook (Book_Name, Author_Name, Number_Of_Books)
-            VALUES('$Book_name', '$Author_name', '$Number_of_books')";
+              $sql="INSERT INTO addbook (Book_Name, Author_Name, Number_Of_Books)
+              VALUES('$Book_name', '$Author_name', '$Number_of_books')";
 
-            $result = mysqli_query($conn, $sql);
+              $result = mysqli_query($conn, $sql);
 
-            $data = mysqli_query($conn, "SELECT MAX(id) FROM addbook");
-            $inc = mysqli_fetch_row($data);
-            //    $id = $inc[0] + 1;
-
-            //    $file = "(".$id.")_".$name;
-            //    $target = "Data/books/".basename($file);
-
-            if(!$result)
-              echo "<font color='#FF0000'>There is an error while quering</font>";
-
-            // if(move_uploaded_file($_FILES['files']['tmp_name'], $target))
-              // $msg = "File uploaded successfully";
-            else
-              $msg = "Book uploaded successfully";
-
-              echo '<script language="javascript">';
-              echo 'alert("'.$msg.'")';
-              echo '</script>';
-
-              $URL="addBook.php";
-              echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
-              echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-              // header("refresh: 0.5; url = addBook.php");
+              if(!$result){
+                  $msg = "There is an error while quering";
+                  echo '<script language="javascript">';
+                    echo 'alert("'.$msg.'")';
+                  echo '</script>';
+              }
+              
+              // $URL="addBook.php";
+              // echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+              // echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
           }
       ?>
 
@@ -88,6 +74,9 @@
                     <button type="submit" name="submit" class="btn btn-primary mt-4">Add</button>
                 </div>
                 <div class="col-md-3"></div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="displayBook.php">Show all books</a>
             </div>
         </form>
     </div>

@@ -29,7 +29,7 @@ if(isset($_POST['signup-btn'])){
         $pattern = false;
         if(strlen($psw) >= 8 && !ctype_upper($psw) && !ctype_lower($psw)) $pattern = true;
 
-        if(!$pattern) $psw_error_msg = "<font color='#FF0000'> Your password should be of at least 8 length and contain one upper and lower case character </font><br>";
+        if(!$pattern) $psw_error_msg = "<font color='#FF0000'> Your password should be of at least 8 length and contain one upper and lower case character </font>";
         else if($psw != $psw_repeat)
             $psw_error_msg = "<font color='#FF0000'> Your password doesn't match! </font>";
         else{
@@ -44,6 +44,7 @@ if(isset($_POST['signup-btn'])){
             $user_id = $conn->insert_id;
             $_SESSION['id'] = $user_id;
             $_SESSION['name'] = $username;
+            $_SESSION['designation'] = $designation;
             $_SESSION['email'] = $email;
             $_SESSION['message'] = "You are all set, just one more step to activate your account!";
             $_SESSION['alert-class'] = "alert-success";
@@ -52,9 +53,9 @@ if(isset($_POST['signup-btn'])){
             sendVerificationEmail($email, $token);
 
             if($result){
-                echo '<script language="javascript">';
-                    echo 'alert("You have successfully created an account.")';
-                echo '</script>';
+                // echo '<script language="javascript">';
+                //     echo 'alert("You have successfully created an account.")';
+                // echo '</script>';
 
                 $URL="activation.php";
                 echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
@@ -80,10 +81,11 @@ if(isset($_POST['login-btn'])){
     $result = mysqli_query($conn, $sql);
 
     if(!(mysqli_num_rows($result) > 0))
-        $email_error = "<br><font color='#FF0000'> This email address doesn't exist in our database </font><br>";
+        $email_error = "<font color='#FF0000'> This email address doesn't exist in our database </font><br>";
 
     $rows = mysqli_fetch_assoc($result);
     $hpsw = $rows['Psw'];
+    $_SESSION['designation'] = $rows['Designation'];
     $verified = $rows['verified'];
 
     if(password_verify($pass, $hpsw) && $verified){
@@ -94,7 +96,6 @@ if(isset($_POST['login-btn'])){
         $_SESSION['name'] = $rows['UserName'];
         $_SESSION['email'] = $rows['Email'];
         $_SESSION['occupation'] = $rows['Occupation'];
-        $_SESSION['designation'] = $rows['Designation'];
         $_SESSION['verified'] = $verified;
 
         $URL="index.php";
@@ -171,12 +172,17 @@ if(isset($_POST['reset-password'])){
     $hpsw = password_hash($psw, PASSWORD_DEFAULT);
     $email = $_SESSION['email'];
 
-    if($psw != $psw_repeat)
-        $psw_error_msg = "<font color='#FF0000'> Your password doesn't match!</font><br>";
+    $pattern = false;
+    if(strlen($psw) >= 8 && !ctype_upper($psw) && !ctype_lower($psw)) $pattern = true;
+
+    if(!$pattern) $psw_error_msg = "<font color='#FF0000'> Your password should be of at least 8 length and contain one upper and lower case character </font>";
+    else if($psw != $psw_repeat)
+        $psw_error_msg = "<font color='#FF0000'> Your password doesn't match!</font>";
     else{
         $sql = "UPDATE users SET Psw='$hpsw' WHERE Email='$email'";
         $result = mysqli_query($conn, $sql);
         if($result){
+            $_SESSION['login'] = false;
             $URL="login.php";
             echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
             echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
