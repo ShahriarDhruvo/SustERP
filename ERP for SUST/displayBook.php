@@ -1,6 +1,7 @@
-<!-- header -->
-<?php include 'header.php'; ?>
-<!-- header -->
+<?php 
+    require 'config/db.php';
+    include 'header.php'
+?>
 
 <html lang="en">
 
@@ -31,7 +32,7 @@
 
         <?php
             // Create database connection
-            require 'config/db.php';
+            // require 'config/db.php';
             // $conn = mysqli_connect("localhost", "root", "");
             
             // if(!$conn)

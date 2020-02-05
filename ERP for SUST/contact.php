@@ -1,6 +1,7 @@
-<!-- header -->
-<?php include 'header.php' ?>
-<!-- header -->
+<?php 
+    require 'config/db.php';
+    include 'header.php'
+?>
 
 <html lang="en">
 <head>

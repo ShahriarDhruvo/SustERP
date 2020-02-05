@@ -1,6 +1,7 @@
-<!-- header -->
-<?php include 'header.php'; ?>
-<!-- header -->
+<?php 
+    require 'config/db.php';
+    include 'header.php'
+?>
 
 <html lang="en">
 
@@ -27,7 +28,7 @@
           ini_set('max_execution_time', 300);
 
           // Create database connection
-          require 'config/db.php';
+          // require 'config/db.php';
           // $conn=mysqli_connect("localhost", "root", "", "erp_datas");
           // if(!$conn)
           //     echo ("Error Connection: ".mysqli_connect_error());

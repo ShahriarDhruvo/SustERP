@@ -1,6 +1,8 @@
-<!-- header -->
-<?php include 'header.php'; ?>
-<!-- header -->
+<?php 
+    require 'config/db.php';
+    include 'controllers/authController.php';
+    include 'header.php'; 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +17,6 @@
 </head>
 <body>
     <div class="container" style="margin-top: 0%;">
-        <?php
-            include 'controllers/authController.php';
-        ?>
         <div class="row">
             <div class="col-md-6 offset-md-3 text-center">
                 <img src="Img/Avatars/LogIn_avatar.png" alt="Profile picture" style="width: 42%; margin-bottom: 5%;">

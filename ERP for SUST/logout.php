@@ -1,4 +1,5 @@
 <?php
+    require 'config/db.php';
     require_once 'controllers/authController.php';
 
     session_destroy();

@@ -1,9 +1,6 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-}
 
-require 'config/db.php';
+// require 'config/db.php';
 require_once 'emailController.php';
 
 // if(!mysqli_select_db($conn, "erp_datas"))

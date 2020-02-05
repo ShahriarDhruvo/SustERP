@@ -1,6 +1,7 @@
 <?php 
-    include 'header.php';
+    require 'config/db.php';
     require_once 'controllers/authController.php';
+    include 'header.php';
 ?>
 
 <html lang="en">

@@ -1,6 +1,25 @@
 <?php
 
+if(!isset($_SESSION)){
+    session_start();
+}
+
 require 'constants.php';
+ 
+$login_s = false;
+$name_s = null;
+$occupation_s = null;
+$department_s = null;
+$your_assignment = true;
+$batch = null;
+            
+if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
+    $login_s = $_SESSION['login']; 
+    $name_s = ucfirst($_SESSION['name']);
+    $occupation_s = $_SESSION['occupation'];
+    $department_s = $_SESSION['department'];
+    $batch = $_SESSION['batch'];
+}
 
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
 

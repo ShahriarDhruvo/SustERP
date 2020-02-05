@@ -1,6 +1,7 @@
-<!-- header -->
-<?php include 'header.php'; ?>
-<!-- header -->
+<?php 
+    require 'config/db.php';
+    include 'header.php'
+?>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
 				date_default_timezone_set('Asia/Dhaka');
 
 				// Create database connection
-				require 'config/db.php';
+				// require 'config/db.php';
 				// if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
 				// 	echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
 

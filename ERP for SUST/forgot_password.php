@@ -1,5 +1,7 @@
 <?php
+    require 'config/db.php';
     include 'controllers/authController.php';
+    include 'header.php';
 ?>
 
 <!DOCTYPE html>

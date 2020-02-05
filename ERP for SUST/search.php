@@ -1,4 +1,3 @@
-<!-- search -->
 <div style="margin-bottom: 8%;">
     <form method="POST" action="<?php echo $this_file_name; ?>" enctype="multipart/form-data" class="card card-body bg-light">
         <div class="form-inline">
@@ -16,4 +15,3 @@
         </div>
     </form>
 </div>
-<!-- search -->

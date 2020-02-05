@@ -1,6 +1,8 @@
-<!-- header -->
-<?php include 'header.php'; ?>
-<!-- header -->
+<?php 
+    require 'config/db.php';
+    require_once 'controllers/authController.php';
+    include 'header.php';
+?>
 
 <html lang="en">
 
@@ -21,8 +23,6 @@
         </script> -->
 
         <?php
-            require_once 'controllers/authController.php';
-
             // Verify user using token
             if(isset($_GET['token'])){
                 $token = $_GET['token'];

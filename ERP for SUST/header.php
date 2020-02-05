@@ -1,21 +1,3 @@
-<?php
-    session_start();
-    $login_s = false;
-    $name_s = null;
-    $occupation_s = null;
-    $department_s = null;
-    $batch = null;
-                
-    if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
-        $login_s = $_SESSION['login']; 
-        $name_s = ucfirst($_SESSION['name']);
-        $occupation_s = $_SESSION['occupation'];
-        $department_s = $_SESSION['department'];
-        $batch = $_SESSION['batch'];
-        $your_assignment = true;
-    }
-?>
-
 <nav class="navbar navbar-expand-sm bg-light" style="margin-bottom: 5%; padding-top: 1.10%; padding-bottom: 1.10%;">  
     <a class="navbar-brand" style="margin-left: 3%;" href="index.php">
         <img class="img-responsive" src="Img/Logos/logo2.png" alt="logo" style="width: 120px;">

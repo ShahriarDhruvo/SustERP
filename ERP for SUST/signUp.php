@@ -1,6 +1,7 @@
 <?php 
-    include 'header.php';
+    require 'config/db.php';
     require_once 'controllers/authController.php'; 
+    include 'header.php';
 ?>
 
 <html lang="en">
@@ -15,9 +16,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- <div class="topBorder">  
-        <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
-    </div> -->
     <div class="container">
         <form action="signUp.php" method="post">
             <h2>Sign Up</h2>

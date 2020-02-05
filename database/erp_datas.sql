@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2020 at 06:42 PM
+-- Generation Time: Feb 05, 2020 at 05:44 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -95,7 +95,6 @@ CREATE TABLE `attendance` (
 INSERT INTO `attendance` (`id`, `date`, `uploaders_name`, `department_name`, `batch_year`, `semester`, `course_name`, `files`, `comments`) VALUES
 (16, '29/01/2020 Wednesday 02:18:51am', 'Dhruvo', 'SWE', 2017, '3/1', 'math', '(1)_1.jpg', 'fdfdfs'),
 (17, '29/01/2020 Wednesday 03:17:43am', 'Dhruvo', 'SWE', 2019, '3/2', 'SWE', '(17)_1.jpg', 'LOL'),
-(19, '29/01/2020 Wednesday 03:45:29am', 'Dhruvo', 'SWE', 2019, '3/2', 'math', '(19)_1.jpg', 'fasda'),
 (21, '29/01/2020 Wednesday 03:59:46am', 'Dhruvo', 'MEE', 2019, '1/1', 'sWe', '(21)_2.jpg', 'sdsad');
 
 -- --------------------------------------------------------
@@ -241,7 +240,8 @@ INSERT INTO `users` (`id`, `UserName`, `Department`, `Occupation`, `Designation`
 (18, 'Librarian', 'SWE', 'librarian', 'none', 0, 'hodoc59800@riv3r.net', '$2y$10$KfNx/B9OYQtcTyMbj9rkDOEcVexdFIM7hwH736T.VX2EMaW0UmAam', 'f51002c0d3e3605bb45e4ce16de7c742f7ac96334ba02b124ca7b22e71901603894215c28db28cbc26f6b48782e1eeb2087c', 1),
 (19, 'teacher', 'SWE', 'teacher', 'assistant professor', 0, 'fenaca9578@cnetmail.net', '$2y$10$3bNA2qtSicOFk7jEnUTH1uH3nRwR85wGO0z8g65nw685LlwBva1Oq', '6e147c009f732c1c2d3b1a4dd32e25c04ef204fc6dbb6d7252072a923f02bd283ec34d206f9a53061f699d360cc6b651d720', 1),
 (20, 'Jishnu', 'SWE', 'teacher', 'none', 0, 'pedav24404@eroyal.net', '$2y$10$jXz3S/mVADZ2iRYZR4RmdeXxGCteDxH0JuEfU.4n0K.03Ycx.jq46', '1da87749fcef61b4be92c91a91c5e2cd1df5c585ebdf7fdc62fe7d7d352a4735b49f201e6badc31aa318705b58c9ac21c2bc', 1),
-(22, 'Muksid', 'SWE', 'admin', 'none', 0, 'vikoc85776@riv3r.net', '$2y$10$3Vtv0iNaWp9aQg.89MnNRe6btCz1ojc9x7M0mm.rnBs/sXEtCHJFC', '2a08ba6effcb80a7ac655b2f16837158be672b4402fce1a3e9687f983eabd4871b717ce123b437cbc9cdfe204260e13ee455', 1);
+(22, 'Muksid', 'SWE', 'admin', 'none', 0, 'vikoc85776@riv3r.net', '$2y$10$3Vtv0iNaWp9aQg.89MnNRe6btCz1ojc9x7M0mm.rnBs/sXEtCHJFC', '2a08ba6effcb80a7ac655b2f16837158be672b4402fce1a3e9687f983eabd4871b717ce123b437cbc9cdfe204260e13ee455', 1),
+(23, 'Riyad', 'CSE', 'admin', 'professor', 0, 'jipem78195@cityroyal.org', '$2y$10$Jdm44ZyfGNI04NRRaZU0bebH/h6QmURKX5XflgPVWX4nDPBddKaIu', 'cca35640c721921e0c87ec26ed99c6a0aefc39ffcf5fceac540e0b8e13af65458614caa7005ec2f2f141bae35a61591d7f1a', 1);
 
 --
 -- Indexes for dumped tables
@@ -358,7 +358,7 @@ ALTER TABLE `returnbook`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
