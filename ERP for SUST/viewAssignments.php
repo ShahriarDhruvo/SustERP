@@ -16,11 +16,8 @@
 	</head>
 	<body>
 		<div class="container">
-
-            <h3>Assignments<br><br></h3>
-            
             <?php
-                $your_assignment = true;
+				$your_assignment = true;
                 $this_file_name = "viewAssignments.php";
             
                 // Create database connection
@@ -56,8 +53,16 @@
             
                 if(!($occupation_s == "teacher" || $occupation_s == "student" || $occupation_s == "admin")) $authorization = false;
 
-                include 'search.php';
+                echo "<div style='margin-top: 10%;'>"; 
+					include 'search.php';
+				echo "</div>";
+			?>
 
+			<div style="margin-top: 10%;">
+				<h3>Assignments</h3>
+			</div>
+            
+            <?php
                 if(!$login_s && $conn) echo "<h2>Log in into your account first.</h2>";
                 else if(!$authorization && $conn) echo "<h2>You are not authorize to see the contents of this page.</h2>";
                 else if(!(mysqli_num_rows($result)) && $login_s && $authorization  && $conn)

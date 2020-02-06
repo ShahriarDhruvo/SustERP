@@ -47,6 +47,7 @@
                         echo "<th scope='col'>"; echo "Books Name"; echo "</th>";
                         echo "<th scope='col'>"; echo "Author Name"; echo "</th>";
                         echo "<th scope='col'>"; echo "Number Of Books"; echo "</th>";
+                        echo "<th scope='col'>"; echo "Uploaded by"; echo "</th>";
                     echo "</thead>";
                     
                     while($row=mysqli_fetch_array($result)){
@@ -55,6 +56,7 @@
                             echo "<td>"; echo ucfirst($row["Book_Name"]); echo "</td>";
                             echo "<td>"; echo ucfirst($row["Author_Name"]); echo "</td>";
                             echo "<td>"; echo $row["Number_Of_Books"]; echo "</td>"; 
+                            echo "<td>"; echo $row["uploaders_name"]; echo "</td>"; 
                         echo "</tr>";
                     }
                 echo "</table>";

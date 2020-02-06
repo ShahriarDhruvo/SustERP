@@ -75,8 +75,8 @@
 						$target = "Data/events/".basename($file);
 						$curr_time = date("d-m-Y")." ".date("h:ia");
 
-						$sql = "INSERT INTO events (date, day, time, ename, orname, edate, link, files, comments) 
-						VALUES ('$curr_time', '$day', '$time', '$ename', '$orname', '$edate', '$link', '$file', '$comment')";
+						$sql = "INSERT INTO events (date, day, time, uploaders_name, ename, orname, edate, link, files, comments) 
+						VALUES ('$curr_time', '$day', '$time', '$name_s', '$ename', '$orname', '$edate', '$link', '$file', '$comment')";
 						
 						// execute query
 						if(!mysqli_query($conn, $sql))
@@ -99,7 +99,32 @@
 					}
 					else echo "<h2>Log in into your account first.</h2>";
 				}
-				$result = mysqli_query($conn, "SELECT * FROM events ORDER BY edate, time");
+				if(!($occupation_s == "admin"))
+					$ssql = "SELECT * FROM events WHERE uploaders_name = '$name_s'";
+				else $ssql = "SELECT * FROM events";
+
+				$search_term = null;
+				$filter = null;
+
+				if(isset($_POST['search'])){
+					$search_term = htmlspecialchars($_POST['search_box']);
+					$filter = $_POST['filter'];
+
+					if($filter == "1")
+						$ssql .= " WHERE CONCAT(date, day, time, ename, orname, edate, link, files, comments) LIKE '%".$search_term."%' ORDER BY edate, time";
+					// else if($filter == "2")
+					// 	$ssql .= " WHERE department_name LIKE '%".$search_term."%' ORDER BY semester";
+					// else if($filter == "3")
+					// 	$ssql .= " WHERE batch_year LIKE '%".$search_term."%' ORDER BY semester";
+					// else if($filter == "4")
+					// 	$ssql .= " WHERE semester LIKE '%".$search_term."%' ORDER BY semester";
+					// else if($filter == "5")
+					// 	$ssql .= " WHERE course_name LIKE '%".$search_term."%' ORDER BY semester";
+				}
+				else $ssql .= " ORDER BY edate, time";
+
+				if(!$result = mysqli_query($conn, $ssql)) echo mysqli_error($conn);
+
 				$authorization = true;
 
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
@@ -117,11 +142,11 @@
 						<div>
 							<div class="form-group">
 								<label><b>Event name </b></label>
-								<input class="form-control" type="text" name="ename" required>
+								<input class="form-control" placeholder="Event name" type="text" name="ename" required>
 							</div>
 							<div class="form-group">
 								<label><b>Organized by </b></label>
-								<input class="form-control" type="text" name="orname" required>
+								<input class="form-control" placeholder="Organization" type="text" name="orname" required>
 							</div>
 							<br>
 							<div class="form-inline">
@@ -133,7 +158,7 @@
 							<br>
 							<div class="form-group">
 								<label><b>External Link </b></label>
-								<input class="form-control" type="text" name="link">
+								<input class="form-control" placeholder="Link..." type="text" name="link">
 							</div>
 							<div class="custom-file">
 								<input type="file" name="files" class="custom-file-input" id="inputGroupFile02">
@@ -159,7 +184,25 @@
 				?>
 			</form>
 
-			<h3><br><br>Events<br><br></h3>
+			<!-- search -->
+			<div style="margin-top: 10%;">
+				<form method="POST" action="addEvents.php" enctype="multipart/form-data" class="card card-body bg-light">
+					<div class="form-inline">
+						<input type="text" class="form-control mr-sm-4" placeholder="Search" name="search_box" value="<?php echo $search_term; ?>" style="width: 82%;">
+
+						<select class="form-control mr-sm-4" name="filter">
+							<option <?php if($filter == 1) echo 'selected'; ?> value="1">All</option>
+						</select>
+
+						<button class="btn btn-primary" type="submit" name="search">Search</button>
+					</div>
+				</form>
+			</div>
+			<!-- search -->
+			
+			<div style="margin-top: 10%;">
+				<h3>Events</h3>
+			</div>
 
 			<?php
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $conn)

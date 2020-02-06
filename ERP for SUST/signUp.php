@@ -64,7 +64,7 @@
                     <label for="email"><b>Email</b></label>
                     <input type="email" value="<?php echo $email; ?>" placeholder="Enter Email" name="email" class="form-control" required>
 
-                    <div class="mt-2 mb-2">
+                    <div class="mt-3">
                         <?php echo $email_error; ?>
                     </div>
 

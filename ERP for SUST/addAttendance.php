@@ -25,11 +25,6 @@
 			
 				$your_assignment = true;
 			
-				// Create database connection
-				// require 'config/db.php';
-				// if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
-				// 	echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>"; 
-			
 				// Initialize message variable
 				$msg = "";
 				$date = date("d/m/Y")." ".date("l")." ".date("h:i:sa");
@@ -92,7 +87,9 @@
 					}
 					else echo "<h2>Log in into your account first.</h2>";
 				}
-				$ssql = "SELECT * FROM attendance";
+				if(!($occupation_s == "admin"))
+					$ssql = "SELECT * FROM attendance WHERE uploaders_name = '$name_s'";
+				else $ssql = "SELECT * FROM attendance";
 
 				$search_term = null;
 				$filter = null;
@@ -119,26 +116,6 @@
 			
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
 			?>
-
-			<!-- search -->
-			<div style="margin-bottom: 8%;">
-				<form method="POST" action="addAttendance.php" enctype="multipart/form-data" class="card card-body bg-light">
-					<div class="form-inline">
-						<input type="text" class="form-control mr-sm-4" placeholder="Search" name="search_box" value="<?php echo $search_term; ?>" style="width: 74%;">
-
-						<select class="form-control mr-sm-4" name="filter">
-							<option <?php if($filter == 1) echo 'selected'; ?> value="1">All</option>
-							<option <?php if($filter == 2) echo 'selected'; ?> value="2">Department</option>
-							<option <?php if($filter == 3) echo 'selected'; ?> value="3">Batch</option>
-							<option <?php if($filter == 4) echo 'selected'; ?> value="4">Year/Semester</option>
-							<option <?php if($filter == 5) echo 'selected'; ?> value="5">Course</option>
-						</select>
-
-						<button class="btn btn-primary" type="submit" name="search">Search</button>
-					</div>
-				</form>
-			</div>
-			<!-- search -->
 
 			<h3>Upload an attendance<br><br></h3>
 
@@ -205,7 +182,29 @@
 				?>
 			</form>
 
-			<h3><br><br>Attendance<br><br></h3>
+			<!-- search -->
+			<div style="margin-top: 10%;">
+				<form method="POST" action="addAttendance.php" enctype="multipart/form-data" class="card card-body bg-light">
+					<div class="form-inline">
+						<input type="text" class="form-control mr-sm-4" placeholder="Search" name="search_box" value="<?php echo $search_term; ?>" style="width: 74%;">
+
+						<select class="form-control mr-sm-4" name="filter">
+							<option <?php if($filter == 1) echo 'selected'; ?> value="1">All</option>
+							<option <?php if($filter == 2) echo 'selected'; ?> value="2">Department</option>
+							<option <?php if($filter == 3) echo 'selected'; ?> value="3">Batch</option>
+							<option <?php if($filter == 4) echo 'selected'; ?> value="4">Year/Semester</option>
+							<option <?php if($filter == 5) echo 'selected'; ?> value="5">Course</option>
+						</select>
+
+						<button class="btn btn-primary" type="submit" name="search">Search</button>
+					</div>
+				</form>
+			</div>
+			<!-- search -->
+			
+			<div style="margin-top: 10%;">
+				<h3>Attendance</h3>
+			</div>
 
 			<?php
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $conn)

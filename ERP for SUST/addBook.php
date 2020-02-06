@@ -37,8 +37,8 @@
               
               //$name = htmlspecialchars($_FILES['files']['name']);
 
-              $sql="INSERT INTO addbook (Book_Name, Author_Name, Number_Of_Books)
-              VALUES('$Book_name', '$Author_name', '$Number_of_books')";
+              $sql="INSERT INTO addbook (Book_Name, Author_Name, Number_Of_Books, uploaders_name)
+              VALUES('$Book_name', '$Author_name', '$Number_of_books', '$name_s')";
 
               $result = mysqli_query($conn, $sql);
 

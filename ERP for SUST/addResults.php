@@ -39,7 +39,7 @@
 					if($login_s && $conn){
 						$department = htmlspecialchars($_POST['department']);
 						$batch = htmlspecialchars($_POST['batch']);
-						$year_semes = htmlspecialchars($_POST['year_semes']);
+						$year_semes = $_POST['year']."/".$_POST['semes'];
 						$course_name = htmlspecialchars($_POST['course_name']);
 						
 						if($department != $department_s && $occupation_s != "admin")
@@ -91,7 +91,9 @@
 					}
 					else echo "<h2>Log in into your account first.</h2><br><br><br>";
 				}
-				$ssql = "SELECT * FROM results";
+				if(!($occupation_s == "admin"))
+					$ssql = "SELECT * FROM results WHERE uploaders_name = '$name_s'";
+				else $ssql = "SELECT * FROM results";
 
 				$search_term = null;
 				$filter = null;
@@ -118,8 +120,6 @@
 				$authorization = true;
 
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
-
-				include 'search.php';
 			?>
 
 			<h3><br>Upload a result<br><br></h3>
@@ -133,31 +133,36 @@
 						echo '
 						<input type="hidden" name="size" value="10000000">
 						<div>   
-							<div class="form-group"> 
-								<label><b>Department</b></label>
-								<select class="form-control" name="department">
-									<option value="SWE" selected="selected">SWE</option>
-									<option value="CSE">CSE</option>
-									<option value="EEE">EEE</option>
-									<option value="MEE">MEE</option>
-									<option value="CEE">CEE</option>
-									<option value="CEP">CEP</option>
-									<option value="IPE">IPE</option>
-									<option value="PME">PME</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label><b>Batch</b></label>
-								<input type="number" min="1986" value="'.$year.'" placeholder="Batch Year" name="batch" class="form-control">
-							</div>
-							<div class="form-group">
-								<label><b>Year/Semester</b></label>
-								<input type="text" placeholder="Enter Semester year/semester format" name="year_semes" class="form-control" required>
-							</div>
 							<div class="form-group">
 								<label><b>Course name</b></label>
 								<input type="text" placeholder="Enter the course name" name="course_name" class="form-control" required>
 							</div>
+						
+							<div class="form-group" style="margin-right: 2%;">
+								<div class="form-inline">
+									<label class="mr-sm-2"><b>Department</b></label>
+									<select class="form-control mb-2 mr-sm-4" name="department">
+										<option value="SWE" selected="selected">SWE</option>
+										<option value="CSE">CSE</option>
+										<option value="EEE">EEE</option>
+										<option value="MEE">MEE</option>
+										<option value="CEE">CEE</option>
+										<option value="CEP">CEP</option>
+										<option value="IPE">IPE</option>
+										<option value="PME">PME</option>
+									</select>
+
+									<label class="mr-sm-2"><b>Batch</b></label>
+									<input type="number" min="1986" max="'.$year.'" value="'.$year.'" placeholder="Batch Year" name="batch" class="form-control mb-2 mr-sm-4">
+
+									<label class="mr-sm-2"><b>Year</b></label>
+									<input type="number" min="1" max="4" placeholder="Year" name="year" class="form-control mb-2 mr-sm-4" value="1" required>
+
+									<label class="mr-sm-2"><b>Semester</b></label>
+									<input type="number" min="1" max="2" placeholder="Semester" name="semes" class="form-control mb-2 mr-sm-4" value="1" required>
+								</div>
+							</div>
+							
 							<div class="custom-file">
 								<input type="file" name="files" class="custom-file-input" id="inputGroupFile02" required>
 								<label class="custom-file-label" for="inputGroupFile02">Choose file...</label>
@@ -172,7 +177,13 @@
 				?>
 			</form>
 
-			<h3><br><br>Results<br><br></h3>
+			<div style="margin-top: 10%;">
+				<?php include 'search.php'; ?>
+			</div>
+
+			<div style="margin-top: 10%;">
+				<h3>Results</h3>
+			</div>
 
 			<?php
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $conn)

@@ -102,7 +102,9 @@
 					}
 					else echo "<h2>Log in into your account first.</h2><br><br><br>";
 				}
-				$ssql = "SELECT * FROM assignments";
+				if(!($occupation_s == "admin"))
+					$ssql = "SELECT * FROM assignments WHERE uploaders_name = '$name_s'";
+				else $ssql = "SELECT * FROM assignments";
 
 				$search_term = null;
 				$filter = null;
@@ -129,8 +131,6 @@
 				$authorization = true;
 
 				if(!($occupation_s == "teacher" || $occupation_s == "admin") && $login_s) $authorization = false;
-
-				include 'search.php';
 			?>
 
 			<h3>Upload an assignment<br><br></h3>
@@ -207,7 +207,15 @@
 				?>
 			</form>
 
-			<h3><br><br>Assignments<br><br></h3>
+			<?php
+				echo "<div style='margin-top: 10%;'>"; 
+					include 'search.php';
+				echo "</div>"
+			?>
+
+			<div style="margin-top: 10%;">
+				<h3>Assignments</h3>
+			</div>
 
 			<?php
 				if(!(mysqli_num_rows($result)) && $login_s && $authorization && $conn)

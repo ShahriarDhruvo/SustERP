@@ -16,21 +16,13 @@
 	</head>
 	<body>
 		<div class="container">
-        
-            <h3>Attendance<br><br></h3>
-            
-            <?php
+			<?php
 				$your_assignment = true;
 				$this_file_name = "viewAttendance.php";
-            
-				// Create database connection
-				// require 'config/db.php';
-                // if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
-                //     echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
 				
 				$ssql = "SELECT * FROM attendance";
 
-                $search_term = null;
+				$search_term = null;
 				$filter = null;
 
 				if(isset($_POST['search'])){
@@ -49,14 +41,22 @@
 						$ssql .= " WHERE course_name LIKE '%".$search_term."%'";
 				}
 
-                if(!$result = mysqli_query($conn, $ssql)) echo mysqli_error($conn);
+				if(!$result = mysqli_query($conn, $ssql)) echo mysqli_error($conn);
 				
 				$authorization = true;
-            
-                if(!($occupation_s == "teacher" || $occupation_s == "student" || $occupation_s == "admin")) $authorization = false;
+			
+				if(!($occupation_s == "teacher" || $occupation_s == "student" || $occupation_s == "admin")) $authorization = false;
 				
-				include 'search.php';
+				echo "<div style='margin-top: 10%;'>"; 
+					include 'search.php';
+				echo "</div>";
+			?>
 
+			<div style="margin-top: 10%;">
+				<h3>Attendance</h3>
+			</div>
+            
+            <?php
                 if(!$login_s && $conn) echo "<h2>Log in into your account first.</h2>";
                 else if(!$authorization && $conn) echo "<h2>You are not authorize to see the contents of this page.</h2>";
                 else if(!(mysqli_num_rows($result)) && $login_s && $authorization  && $conn)

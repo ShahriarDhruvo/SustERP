@@ -49,7 +49,14 @@
             
                 if(!($occupation_s == "teacher" || $occupation_s == "student" || $occupation_s == "admin")) $authorization = false;
 				
-				include 'search.php';
+				echo "<div style='margin-top: 10%;'>"; 
+					include 'search.php';
+				echo "</div>";
+				
+				echo '
+				<div style="margin-top: 10%;">
+					<h3>Results:</h3>
+				</div>';
 
                 if(!$login_s && $conn) echo "<h2>Log in into your account first.</h2>";
                 else if(!$authorization && $conn) echo "<h2>You are not authorize to see the contents of this page.</h2>";
@@ -60,7 +67,6 @@
                         if(($occupation_s == "student" && $department_s == $row['department_name'] && $batch == $row['batch_year']) || ($occupation_s == "admin")){
                             $your_assignment = false;
                             $path = "Data/results/".$row['files'];
-                            echo "<br><br><br><h2>Result: </h2><br>";
                             echo "<div class='card card-body bg-light'>";
 								echo "<br>";
 								echo "<div class='row'>";
