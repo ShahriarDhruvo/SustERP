@@ -19,11 +19,6 @@
             <?php
 				$your_assignment = true;
                 $this_file_name = "viewAssignments.php";
-            
-                // Create database connection
-                // require 'config/db.php';
-                // if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
-                //     echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
 
                 $ssql = "SELECT * FROM assignments";
 

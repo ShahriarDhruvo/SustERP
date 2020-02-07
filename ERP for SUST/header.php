@@ -9,9 +9,6 @@
         <li class="nav-item">
             <a class="nav-link" target="_blank" href="https://www.sust.edu/">Our Campus</a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="index.php">Home</a>
-        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="about.php">About</a>
         </li>

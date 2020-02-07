@@ -16,20 +16,12 @@
 	</head>
 	<body>
 		<div class="container">
-
-            <!-- <h1><br>Shahjalal University of Science & Technology.<br><br></h1> -->
-
             <?php
                 $your_assignment = true;
 				$file_id = null;
 				
 				if(isset($_POST['readmore']))
 					$file_id = $_POST['id'];
-            
-				// Create database connection
-				// require 'config/db.php';
-                // if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
-				// 	echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
 					
                 $result = mysqli_query($conn, "SELECT * FROM events");
                 $authorization = true;

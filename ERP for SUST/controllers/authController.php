@@ -53,15 +53,9 @@ if(isset($_POST['signup-btn'])){
             sendVerificationEmail($email, $token);
 
             if($result){
-                // echo '<script language="javascript">';
-                //     echo 'alert("You have successfully created an account.")';
-                // echo '</script>';
-
                 $URL="activation.php";
                 echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
                 echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-                // header("refresh: 0.5; url = activation.php");
                 exit();
             }
             else{
@@ -101,8 +95,6 @@ if(isset($_POST['login-btn'])){
         $URL="index.php";
         echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
         echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-        // header('Location: index.php');
         exit();
     }
     else if(!$verified && $email_error == null)
@@ -137,8 +129,6 @@ function verifyUser($token){
             $URL="index.php";
             echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
             echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-            // header('Location: index.php');
             exit();
         }
         else echo "User not found";
@@ -159,8 +149,6 @@ if(isset($_POST['forgot-password'])){
         $URL="password_message.php";
         echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
         echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-        // header('location: password_message.php');
         exit();
     } 
     else $email_error = "<font color='#FF0000'> This email address doesn't exist in the database</font>"; 
@@ -203,7 +191,5 @@ function resetPassword($token){
     $URL="reset_password.php";
     echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
     echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-    // header("location: reset_password.php");
     exit();
 }

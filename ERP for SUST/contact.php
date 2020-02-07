@@ -15,10 +15,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- <div class="topBorder">  
-        <a href="index.php"><img src="Img/Logos/logo2.png" style="width:120px"></a>
-    </div> -->
-
     <div class="container">
         <h2> Developed By </h2>
         <div class="row text-center" style="margin-top: 10%;">

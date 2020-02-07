@@ -23,11 +23,6 @@
 				ini_set('max_execution_time', 300);
 				date_default_timezone_set('Asia/Dhaka');
 
-				// Create database connection
-				// require 'config/db.php';
-				// if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
-				// 	echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
-
 				// Initialize message variable
 				$msg = "Event posted successfully.";
 				$edate = date("Y-m-d");
@@ -94,8 +89,6 @@
 						$URL="addEvents.php";
 						echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 						echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-						// header("refresh: 0.5; url = addEvents.php");
 					}
 					else echo "<h2>Log in into your account first.</h2>";
 				}
@@ -112,14 +105,6 @@
 
 					if($filter == "1")
 						$ssql .= " WHERE CONCAT(date, day, time, ename, orname, edate, link, files, comments) LIKE '%".$search_term."%' ORDER BY edate, time";
-					// else if($filter == "2")
-					// 	$ssql .= " WHERE department_name LIKE '%".$search_term."%' ORDER BY semester";
-					// else if($filter == "3")
-					// 	$ssql .= " WHERE batch_year LIKE '%".$search_term."%' ORDER BY semester";
-					// else if($filter == "4")
-					// 	$ssql .= " WHERE semester LIKE '%".$search_term."%' ORDER BY semester";
-					// else if($filter == "5")
-					// 	$ssql .= " WHERE course_name LIKE '%".$search_term."%' ORDER BY semester";
 				}
 				else $ssql .= " ORDER BY edate, time";
 
@@ -290,9 +275,6 @@
 					$URL="addEvents.php";
 					echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 					echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-					// header("refresh: 0.5; url = addEvents.php");
-					// echo "<script>location.href='addEvents.php'</script>";
 				}
 			?>
 		</div>
@@ -300,6 +282,7 @@
             $('#inputGroupFile02').on('change',function(){
                 //get the file name
                 let fileName = $(this).val();
+				
                 //replace the "Choose a file" label
                 $(this).next('.custom-file-label').html(fileName);
             })

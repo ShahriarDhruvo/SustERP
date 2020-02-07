@@ -23,9 +23,6 @@
           ini_set('post_max_size', '10M');
           ini_set('max_input_time', 300);
           ini_set('max_execution_time', 300);
-
-          // Create database connection
-        //   require 'config/db.php';
           
           if(!$conn)
           echo "<font color='#FF0000'>"."Error Connection: ".mysqli_connect_error()."</font>";
@@ -85,5 +82,4 @@
         <?php include 'footer.php'; ?>
     </div>
 </body>
-
 </html>

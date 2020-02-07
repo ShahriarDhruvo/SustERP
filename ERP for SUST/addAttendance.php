@@ -75,8 +75,6 @@
 								$URL="addAttendance.php";
 								echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 								echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-								// header("refresh: 0.5; url = addAttendance.php");
 							}
 							else{
 								echo '<script language="javascript">';
@@ -267,9 +265,6 @@
 					$URL="addAttendance.php";
 					echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 					echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-					// header("refresh: 0.5; url = addAttendance.php");
-					// echo "<script>location.href='addAttendance.php'</script>";
 				}
 			?>
 		</div>
@@ -277,6 +272,7 @@
             $('#inputGroupFile02').on('change',function(){
                 //get the file name
                 let fileName = $(this).val();
+				
                 //replace the "Choose a file" label
                 $(this).next('.custom-file-label').html(fileName);
             })

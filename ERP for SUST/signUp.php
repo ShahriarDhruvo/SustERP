@@ -85,15 +85,16 @@
                         <label class="form-check-label">Remember me</label>
                     </div>
 
-                    <div class="form-check mb-2">
-                        <input type="checkbox" name="terms_policy" class="form-check-input" required> 
-                        <label class="form-check-label">I agree to the <a href="#">Terms & Policy</a></label>
-                    </div>
-
                     <div class="form-group">
+                        <div class="form-check text-left mb-2">
+                            <input type="checkbox" name="terms_policy" class="form-check-input" required> 
+                            <label class="form-check-label">I agree to the <a href="#">Terms & Policy</a></label>
+                        </div>
+
                         <div class="text-right">
                             <p>Already have an account? <a href="login.php">Login</a></p>
                         </div>
+                        
                         <button type="submit" name="signup-btn" class="btn btn-primary" style="width: 12%;">Sign Up</button>
                         <a href="login.php"><button type="button" class="btn btn-danger" style="width: 12%;">Cancel</button></a>
                     </div>

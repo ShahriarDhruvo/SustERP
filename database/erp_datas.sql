@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 06, 2020 at 05:24 PM
+-- Generation Time: Feb 07, 2020 at 09:29 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -101,8 +101,7 @@ CREATE TABLE `attendance` (
 
 INSERT INTO `attendance` (`id`, `date`, `uploaders_name`, `department_name`, `batch_year`, `semester`, `course_name`, `files`, `comments`) VALUES
 (16, '29/01/2020 Wednesday 02:18:51am', 'Dhruvo', 'SWE', 2017, '3/1', 'math', '(1)_1.jpg', 'fdfdfs'),
-(17, '29/01/2020 Wednesday 03:17:43am', 'Dhruvo', 'SWE', 2019, '3/2', 'SWE', '(17)_1.jpg', 'LOL'),
-(21, '29/01/2020 Wednesday 03:59:46am', 'Dhruvo', 'MEE', 2019, '1/1', 'sWe', '(21)_2.jpg', 'sdsad');
+(17, '29/01/2020 Wednesday 03:17:43am', 'Dhruvo', 'SWE', 2019, '3/2', 'SWE', '(17)_1.jpg', 'LOL');
 
 -- --------------------------------------------------------
 
@@ -378,7 +377,7 @@ ALTER TABLE `returnbook`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

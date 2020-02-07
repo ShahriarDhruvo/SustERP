@@ -26,11 +26,6 @@
 				$your_assignment = true;
 				$this_file_name = "addResults.php";
 
-				// Create database connection
-				// require 'config/db.php';
-				// if(!($conn = mysqli_connect("localhost", "root", "", "erp_datas")))
-				// 	echo "<h2>Connection lost with the database!<br>Check your internet connection or try again later.</h2>";
-
 				// Initialize message variable
 				$msg = "";
 
@@ -79,8 +74,6 @@
 								$URL="addResults.php";
 								echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 								echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-								// header("refresh: 0.5; url = addResults.php");
 							}
 							else{
 								echo '<script language="javascript">';
@@ -244,9 +237,6 @@
 					$URL="addResults.php";
 					echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
 					echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
-
-					// header("refresh: 0.5; url = addResults.php");
-					// echo "<script>location.href='addResults.php'</script>";
 				}
 			?>
 		</div>
@@ -254,6 +244,7 @@
             $('#inputGroupFile02').on('change',function(){
                 //get the file name
                 let fileName = $(this).val();
+				
                 //replace the "Choose a file" label
                 $(this).next('.custom-file-label').html(fileName);
             })
